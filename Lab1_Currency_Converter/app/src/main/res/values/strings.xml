@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Currency Converter</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="value">Value</string>
+    <string name="convert">Convert</string>
+    <string name="results">Results</string>
+    <string name="egp">EGP</string>
+    <string name="usd">USD</string>
+
+    <string-array name="spinner_options">
+        <item>@string/egp</item>
+        <item>@string/usd</item>
+    </string-array>
+</resources>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.peter.lab1_currency_converter.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.40"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="40dp">
+
+                <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="@string/from"
+                    android:textSize="26dp"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/tv_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="@string/to"
+                    android:textSize="26dp"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/tv_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="@string/value"
+                    android:textSize="26dp"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.60"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="40dp">
+
+                <Spinner
+                    android:id="@+id/sp_options1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:entries="@string/egp"
+                    android:layout_weight="1"
+                    />
+
+                <Spinner
+                    android:id="@+id/sp_options2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:entries="@string/usd"
+                    />
+
+                <EditText
+                    android:id="@+id/et_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:layout_weight="1"
+                    android:hint="Enter a Value"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_convert"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="30dp"
+                android:text="@string/convert"
+                android:layout_weight="0.2"
+                android:textSize="20dp"
+                android:paddingLeft="5pt"
+                android:paddingRight="5pt"
+                android:textColor="#212121"
+                android:background="@drawable/button"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_results"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/results"
+                    android:textColor="@color/orange2"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
