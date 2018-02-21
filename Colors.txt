@@ -1,0 +1,6 @@
+    <color name="Greentest">#00897B</color>
+    <color name="grey2">#424242</color>
+    <color name="orange2">#FFB74D</color>
+    <color name="lime">#CDDC39</color>
+    <color name="watermelon">#EF5350</color>
+    <color name="Grey_blue">#2A536B</color>

@@ -109,19 +109,18 @@
                 android:id="@+id/btn_convert"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="40dp"
                 android:text="@string/convert"
-                android:layout_weight="0.2"
+                android:layout_weight="0.35"
                 android:textSize="20dp"
-                android:paddingLeft="5pt"
-                android:paddingRight="5pt"
+                android:padding="5pt"
                 android:textColor="#212121"
                 android:background="@drawable/button"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.8"
+                android:layout_weight="0.6"
                 android:orientation="vertical"
                 android:gravity="center">
 
