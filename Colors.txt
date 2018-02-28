@@ -4,3 +4,6 @@
     <color name="lime">#CDDC39</color>
     <color name="watermelon">#EF5350</color>
     <color name="Grey_blue">#2A536B</color>
+    <color name="light_blue">#2196f6</color>
+    <color name="off_white">#ffffef</color>
+    <color name="DarkGrey">#333333</color>

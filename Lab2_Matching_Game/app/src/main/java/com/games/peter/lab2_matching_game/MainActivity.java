@@ -1,5 +1,6 @@
 package com.games.peter.lab2_matching_game;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,12 +10,18 @@ import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    ArrayList<ImageButton> imgbtns = new ArrayList<>();
-    ArrayList<Integer> randimges = new ArrayList<>();
-    ArrayList<ImageButton> clicked = new ArrayList<>();
-
+    public final static String SCORE_MESSAGE="Score";
+    public final static String UNIT_MESSAGE="Unit";
+    private ArrayList<ImageButton> imgbtns = new ArrayList<>();
+    private ArrayList<Integer> randimges = new ArrayList<>();
+    private ArrayList<ImageButton> clicked = new ArrayList<>();
+    private int Available_Buttons=8;
+    private Intent AudioIntent;
+    private Date Startime;
+    private Date Finishtime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < randimges.size(); i++) {
             imgs += randimges.get(i).toString() + " ";
         }
-
+        AudioIntent=new Intent(MainActivity.this, SoundService.class);
+        Startime = new Date(System.currentTimeMillis());
+        Finishtime=new Date(System.currentTimeMillis());
     }
 
     @Override
@@ -53,10 +62,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             outState.putBoolean("BUTTON_"+GetBtnIndex(imbtn.getId())+"_CLICKABLE",imbtn.isClickable());
             outState.putInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_IMAGE",(Integer)imbtn.getTag());
         }
+        outState.putInt("AVAILABLE_BUTTONS",Available_Buttons);
         outState.putInt("CLICKED_SIZE",clicked.size());
         for (int i=0;i<clicked.size();i++) {
             outState.putInt("CLICKED_BUTTON_"+i,clicked.get(i).getId());
         }
+        outState.putLong("START_TIME",Startime.getTime());
+        outState.putLong("FINISH_TIME",Finishtime.getTime());
     }
 
     @Override
@@ -70,12 +82,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             imbtn.setImageResource(savedInstanceState.getInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_IMAGE"));
             imbtn.setTag(savedInstanceState.getInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_IMAGE"));
         }
+        Available_Buttons=savedInstanceState.getInt("AVAILABLE_BUTTONS");
         int clicked_size=savedInstanceState.getInt("CLICKED_SIZE");
         for (int i=0;i<clicked_size;i++){
             int id=savedInstanceState.getInt("CLICKED_BUTTON_"+i);
             clicked.add(findImageButton(id));
         }
-        System.out.println("CLICKED_SIZE: "+clicked_size);
+        Startime.setTime(savedInstanceState.getLong("START_TIME"));
+        Finishtime.setTime(savedInstanceState.getLong("FINISH_TIME"));
+       // System.out.println("CLICKED_SIZE: "+clicked_size);
     }
 
     @Override
@@ -92,8 +107,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     for (ImageButton imbtn : imgbtns) {
                         imbtn.setClickable(false);
                     }
+                    AudioIntent.putExtra("audio_id",GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
+                    startService(AudioIntent);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                     Handler handler = new Handler();
+                    Available_Buttons-=2;
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             for (ImageButton imbtn : imgbtns) {
@@ -104,8 +122,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             imgbtns.get(GetBtnIndex(im.getId())).setClickable(false);
                             imgbtns.get(GetBtnIndex(clicked.get(0).getId())).setClickable(false);
                             clicked.clear();
+                            stopService(AudioIntent);
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-
+                            if (Available_Buttons==0){
+                                Finishtime = new Date(System.currentTimeMillis());
+                                Intent intent=new Intent(MainActivity.this,ResultActivity.class);
+                                long time=Finishtime.getTime()-Startime.getTime();
+                                if (time<60000)//less than a  minute
+                                {
+                                    intent.putExtra(UNIT_MESSAGE, "Seconds");
+                                    intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000)));
+                                }else if (time>60000&&time<3600000)//less than an hour
+                                {
+                                    intent.putExtra(UNIT_MESSAGE, "Minutes");
+                                    intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000 * 60)));
+                                }else if (time>3600000)//more than an hour
+                                {
+                                    intent.putExtra(UNIT_MESSAGE, "Hours");
+                                    intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000 * 60 * 60)));
+                                }startActivity(intent);
+                                finish();
+                            }
                         }
                     }, 1000);
                     return;
@@ -113,6 +150,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     for (ImageButton imbtn : imgbtns) {
                         imbtn.setClickable(false);
                     }
+                    AudioIntent.putExtra("audio_id",GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
+                    startService(AudioIntent);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -125,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             imgbtns.get(GetBtnIndex(clicked.get(0).getId())).setImageResource(R.drawable.transparent);
                             imgbtns.get(GetBtnIndex(clicked.get(0).getId())).setTag(R.drawable.transparent);
                             clicked.clear();
+                            stopService(AudioIntent);
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                         }
                     }, 1000);
@@ -133,9 +173,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
             if (clicked.size() == 0) {
+                AudioIntent.putExtra("audio_id",GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
+                startService(AudioIntent);
+                for (ImageButton imbtn : imgbtns) {
+                    imbtn.setClickable(false);
+                }
                 im.setImageResource(GetImageID(randimges.get(GetBtnIndex(im.getId()))));
                 im.setTag(GetImageID(randimges.get(GetBtnIndex(im.getId()))));
                 clicked.add(im);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        for (ImageButton imbtn : imgbtns) {
+                            imbtn.setClickable(true);
+                        }
+                        stopService(AudioIntent);
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                    }
+                }, 1000);
                 return;
             }
 
@@ -199,11 +255,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 1:
                 return R.drawable.horse;
             case 2:
-                return R.drawable.beach;
+                return R.drawable.cat;
             case 3:
                 return R.drawable.elephant_clipart_transparent_background_10;
             case 4:
-                return R.drawable.dice;
+                return R.drawable.dog;
+        }
+        return -1;
+    }
+    int GetAudioID(int randomnumber) {
+        switch (randomnumber) {
+            case 1:
+                return R.raw.horse;
+            case 2:
+                return R.raw.cat;
+            case 3:
+                return R.raw.elephant;
+            case 4:
+                return R.raw.dog;
         }
         return -1;
     }
