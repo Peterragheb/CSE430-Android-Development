@@ -37,7 +37,7 @@
         android:gravity="center"
         android:layout_weight="0.5"
         android:textSize="25sp"
-        android:text="TextView"
+        android:text=""
         android:textColor="@color/orange2"/>
     <View
         android:layout_width="match_parent"
