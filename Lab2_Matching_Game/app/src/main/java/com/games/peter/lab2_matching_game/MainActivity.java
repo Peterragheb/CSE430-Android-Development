@@ -13,17 +13,16 @@ import java.util.Collections;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public final static String SCORE_MESSAGE="Score";
-    public final static String UNIT_MESSAGE="Unit";
+    public final static String SCORE_MESSAGE = "Score";
+    public final static String UNIT_MESSAGE = "Unit";
     private ArrayList<ImageButton> imgbtns = new ArrayList<>();
     private ArrayList<Integer> randimges = new ArrayList<>();
     private ArrayList<ImageButton> clicked = new ArrayList<>();
-    private int Available_Buttons=8;
+    private int Available_Buttons = 8;
     private Intent AudioIntent;
     private Date Startime;
     private Date Finishtime;
-    private boolean touched;
-    private ArrayList<ImageButton> Remaining_buttons;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,51 +48,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < randimges.size(); i++) {
             imgs += randimges.get(i).toString() + " ";
         }
-        Remaining_buttons=new ArrayList<>(imgbtns);
-        AudioIntent=new Intent(MainActivity.this, SoundService.class);
+        AudioIntent = new Intent(MainActivity.this, SoundService.class);
         Startime = new Date(System.currentTimeMillis());
-        Finishtime=new Date(System.currentTimeMillis());
+        Finishtime = new Date(System.currentTimeMillis());
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putIntegerArrayList("randimges",randimges);
+        outState.putIntegerArrayList("randimges", randimges);
         for (ImageButton imbtn : imgbtns) {
-           // outState.putInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_ID",imbtn.getId());
-            outState.putInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_VISIBILITY",imbtn.getVisibility());
-            outState.putBoolean("BUTTON_"+GetBtnIndex(imbtn.getId())+"_CLICKABLE",imbtn.isClickable());
-            outState.putInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_IMAGE",(Integer)imbtn.getTag());
+            // outState.putInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_ID",imbtn.getId());
+            outState.putInt("BUTTON_" + GetBtnIndex(imbtn.getId()) + "_VISIBILITY", imbtn.getVisibility());
+            outState.putBoolean("BUTTON_" + GetBtnIndex(imbtn.getId()) + "_CLICKABLE", imbtn.isClickable());
+            outState.putInt("BUTTON_" + GetBtnIndex(imbtn.getId()) + "_IMAGE", (Integer) imbtn.getTag());
         }
-        outState.putInt("AVAILABLE_BUTTONS",Available_Buttons);
-        outState.putInt("CLICKED_SIZE",clicked.size());
-        for (int i=0;i<clicked.size();i++) {
-            outState.putInt("CLICKED_BUTTON_"+i,clicked.get(i).getId());
+        outState.putInt("AVAILABLE_BUTTONS", Available_Buttons);
+        outState.putInt("CLICKED_SIZE", clicked.size());
+        for (int i = 0; i < clicked.size(); i++) {
+            outState.putInt("CLICKED_BUTTON_" + i, clicked.get(i).getId());
         }
-        outState.putLong("START_TIME",Startime.getTime());
-        outState.putLong("FINISH_TIME",Finishtime.getTime());
+        outState.putLong("START_TIME", Startime.getTime());
+        outState.putLong("FINISH_TIME", Finishtime.getTime());
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {//Changing orientation when matching/not matching need to be handled
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        randimges=savedInstanceState.getIntegerArrayList("randimges");
+        randimges = savedInstanceState.getIntegerArrayList("randimges");
         for (ImageButton imbtn : imgbtns) {
             // outState.putInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_ID",imbtn.getId());
-            imbtn.setVisibility(savedInstanceState.getInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_VISIBILITY"));
-            imbtn.setClickable(savedInstanceState.getBoolean("BUTTON_"+GetBtnIndex(imbtn.getId())+"_CLICKABLE"));
-            imbtn.setImageResource(savedInstanceState.getInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_IMAGE"));
-            imbtn.setTag(savedInstanceState.getInt("BUTTON_"+GetBtnIndex(imbtn.getId())+"_IMAGE"));
+            imbtn.setVisibility(savedInstanceState.getInt("BUTTON_" + GetBtnIndex(imbtn.getId()) + "_VISIBILITY"));
+            imbtn.setClickable(savedInstanceState.getBoolean("BUTTON_" + GetBtnIndex(imbtn.getId()) + "_CLICKABLE"));
+            imbtn.setImageResource(savedInstanceState.getInt("BUTTON_" + GetBtnIndex(imbtn.getId()) + "_IMAGE"));
+            imbtn.setTag(savedInstanceState.getInt("BUTTON_" + GetBtnIndex(imbtn.getId()) + "_IMAGE"));
         }
-        Available_Buttons=savedInstanceState.getInt("AVAILABLE_BUTTONS");
-        int clicked_size=savedInstanceState.getInt("CLICKED_SIZE");
-        for (int i=0;i<clicked_size;i++){
-            int id=savedInstanceState.getInt("CLICKED_BUTTON_"+i);
+        Available_Buttons = savedInstanceState.getInt("AVAILABLE_BUTTONS");
+        int clicked_size = savedInstanceState.getInt("CLICKED_SIZE");
+        for (int i = 0; i < clicked_size; i++) {
+            int id = savedInstanceState.getInt("CLICKED_BUTTON_" + i);
             clicked.add(findImageButton(id));
         }
         Startime.setTime(savedInstanceState.getLong("START_TIME"));
         Finishtime.setTime(savedInstanceState.getLong("FINISH_TIME"));
-       // System.out.println("CLICKED_SIZE: "+clicked_size);
+        // System.out.println("CLICKED_SIZE: "+clicked_size);
     }
 
     @Override
@@ -101,23 +99,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final ImageButton im = (ImageButton) view;
         GameLogic(im);
     }
-    private void GameLogic(final ImageButton im){
-        if (clicked.size() < 2 && !touched) {
-            if (clicked.size() == 1 &&(im.getId() !=clicked.get(0).getId())) {
-                touched=true;
+
+    private void GameLogic(final ImageButton im) {
+        if (clicked.size() < 2) {
+            if (clicked.size() == 1 && (im.getId() != clicked.get(0).getId())) {
                 im.setImageResource(GetImageID(randimges.get(GetBtnIndex(im.getId()))));
                 im.setTag(GetImageID(randimges.get(GetBtnIndex(im.getId()))));
                 if ((randimges.get(GetBtnIndex(im.getId())) == randimges.get(GetBtnIndex(clicked.get(0).getId())))) {//IF a match
                     for (ImageButton imbtn : imgbtns) {
                         imbtn.setClickable(false);
                     }
-                    AudioIntent.putExtra("audio_id",GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
+                    AudioIntent.putExtra("audio_id", GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
                     startService(AudioIntent);
-                    AudioIntent.putExtra("audio_id",R.raw.correct);
+                    AudioIntent.putExtra("audio_id", R.raw.correct);
                     startService(AudioIntent);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                     Handler handler = new Handler();
-                    Available_Buttons-=2;
+                    Available_Buttons -= 2;
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             for (ImageButton imbtn : imgbtns) {
@@ -130,34 +128,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             clicked.clear();
                             stopService(AudioIntent);
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                            if (Available_Buttons==0){//no remaining unmatched buttons
+                            if (Available_Buttons == 0) {//no remaining unmatched buttons
                                 Finishtime = new Date(System.currentTimeMillis());
-                                Intent intent=new Intent(MainActivity.this,ResultActivity.class);
-                                long time=Finishtime.getTime()-Startime.getTime();
-                                if (time<60000)//less than a  minute
+                                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                                long time = Finishtime.getTime() - Startime.getTime();
+                                if (time < 60000)//less than a  minute
                                 {
                                     intent.putExtra(UNIT_MESSAGE, "Seconds");
                                     intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000)));
-                                }else if (time>60000&&time<3600000)//less than an hour
+                                } else if (time > 60000 && time < 3600000)//less than an hour
                                 {
                                     intent.putExtra(UNIT_MESSAGE, "Minutes");
                                     intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000 * 60)));
-                                }else if (time>3600000)//more than an hour
+                                } else if (time > 3600000)//more than an hour
                                 {
                                     intent.putExtra(UNIT_MESSAGE, "Hours");
                                     intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000 * 60 * 60)));
-                                }startActivity(intent);
+                                }
+                                startActivity(intent);
                                 finish();
                             }
                         }
                     }, 1000);
-                    touched=false;
                     return;
                 } else if (randimges.get(GetBtnIndex(im.getId())) != randimges.get(GetBtnIndex(clicked.get(0).getId()))) {//if not at match
                     for (ImageButton imbtn : imgbtns) {
                         imbtn.setClickable(false);
                     }
-                    AudioIntent.putExtra("audio_id",GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
+                    AudioIntent.putExtra("audio_id", GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
                     startService(AudioIntent);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                     Handler handler = new Handler();
@@ -176,13 +174,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         }
                     }, 1000);
-                    touched=false;
                     return;
                 }
             }
             if (clicked.size() == 0) {//one button is clicked
-                touched=true;
-                AudioIntent.putExtra("audio_id",GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
+                AudioIntent.putExtra("audio_id", GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
                 startService(AudioIntent);
                 for (ImageButton imbtn : imgbtns) {
                     imbtn.setClickable(false);
@@ -202,7 +198,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                     }
                 }, 1000);
-                touched=false;
                 return;
             }
 
@@ -210,13 +205,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     ImageButton findImageButton(int id) {
-        for(ImageButton imgbtn : imgbtns) {
-            if(imgbtn.getId()==id) {
+        for (ImageButton imgbtn : imgbtns) {
+            if (imgbtn.getId() == id) {
                 return imgbtn;
             }
         }
         return null;
     }
+
     int GetBtnID(int index) {
         switch (index) {
             case 0:
@@ -274,6 +270,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return -1;
     }
+
     int GetAudioID(int randomnumber) {
         switch (randomnumber) {
             case 1:
