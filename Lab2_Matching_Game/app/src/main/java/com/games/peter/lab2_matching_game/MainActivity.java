@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Intent AudioIntent;
     private Date Startime;
     private Date Finishtime;
+    private boolean touched;
+    private ArrayList<ImageButton> Remaining_buttons;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < randimges.size(); i++) {
             imgs += randimges.get(i).toString() + " ";
         }
+        Remaining_buttons=new ArrayList<>(imgbtns);
         AudioIntent=new Intent(MainActivity.this, SoundService.class);
         Startime = new Date(System.currentTimeMillis());
         Finishtime=new Date(System.currentTimeMillis());
@@ -99,12 +102,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GameLogic(im);
     }
     private void GameLogic(final ImageButton im){
-        if (clicked.size() < 2) {
-            if (clicked.size() == 1) {
+        if (clicked.size() < 2 && !touched) {
+            if (clicked.size() == 1 &&(im.getId() !=clicked.get(0).getId())) {
+                touched=true;
                 im.setImageResource(GetImageID(randimges.get(GetBtnIndex(im.getId()))));
                 im.setTag(GetImageID(randimges.get(GetBtnIndex(im.getId()))));
-                if ((GetBtnIndex(im.getId()) != GetBtnIndex(clicked.get(0).getId())) &&
-                        (randimges.get(GetBtnIndex(im.getId())) == randimges.get(GetBtnIndex(clicked.get(0).getId())))) {//IF a match
+                if ((randimges.get(GetBtnIndex(im.getId())) == randimges.get(GetBtnIndex(clicked.get(0).getId())))) {//IF a match
                     for (ImageButton imbtn : imgbtns) {
                         imbtn.setClickable(false);
                     }
@@ -148,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         }
                     }, 1000);
+                    touched=false;
                     return;
                 } else if (randimges.get(GetBtnIndex(im.getId())) != randimges.get(GetBtnIndex(clicked.get(0).getId()))) {//if not at match
                     for (ImageButton imbtn : imgbtns) {
@@ -169,13 +173,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             clicked.clear();
                             stopService(AudioIntent);
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+
                         }
                     }, 1000);
-
+                    touched=false;
                     return;
                 }
             }
             if (clicked.size() == 0) {//one button is clicked
+                touched=true;
                 AudioIntent.putExtra("audio_id",GetAudioID(randimges.get(GetBtnIndex(im.getId()))));
                 startService(AudioIntent);
                 for (ImageButton imbtn : imgbtns) {
@@ -191,10 +197,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         for (ImageButton imbtn : imgbtns) {
                             imbtn.setClickable(true);
                         }
+                        im.setClickable(false);
                         stopService(AudioIntent);
                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                     }
                 }, 1000);
+                touched=false;
                 return;
             }
 
