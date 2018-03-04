@@ -10,6 +10,8 @@ import android.widget.TextView;
 public class ResultActivity extends AppCompatActivity {
     TextView tv_score;
     Button btn_play_again;
+    private Intent AudioIntent;
+    static boolean checkFirstTime=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,9 +20,16 @@ public class ResultActivity extends AppCompatActivity {
         btn_play_again=(Button)findViewById(R.id.btn_play_again);
         Intent intent=this.getIntent();
         tv_score.setText(intent.getIntExtra(MainActivity.SCORE_MESSAGE,-1)+" "+intent.getStringExtra(MainActivity.UNIT_MESSAGE));
+        AudioIntent=new Intent(ResultActivity.this, SoundService.class);
+        AudioIntent.putExtra("audio_id",R.raw.victory);
+        if (checkFirstTime)
+            startService(AudioIntent);
+        checkFirstTime=false;
         btn_play_again.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkFirstTime=true;
+                stopService(AudioIntent);
                 startActivity(new Intent(ResultActivity.this,MainActivity.class));
                 finish();
             }
