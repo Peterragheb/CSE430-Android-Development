@@ -50,14 +50,29 @@
         android:layout_weight="0.8"
         android:paddingLeft="20pt"
         android:paddingRight="20pt"
+        android:text="@string/leaderboard"
+        android:textSize="22sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/play_again_btn"
+        android:id="@+id/btn_leaderboard"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.8"
+        android:paddingLeft="20pt"
+        android:paddingRight="20pt"
         android:text="@string/play_again"
         android:textSize="22sp"
         android:textColor="@android:color/white"
         android:background="@drawable/play_again_btn"
         android:id="@+id/btn_play_again"/>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"/>
+        android:layout_weight="0.1"/>
 </LinearLayout>

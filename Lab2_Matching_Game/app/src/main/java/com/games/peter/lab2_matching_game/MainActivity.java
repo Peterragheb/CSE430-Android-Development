@@ -22,11 +22,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Intent AudioIntent;
     private Date Startime;
     private Date Finishtime;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent=this.getIntent();
+        if (intent.getStringExtra(LoginActivity.USERNAME_MESSAGE)==null) {
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            finish();
+        }
+        username=intent.getStringExtra(LoginActivity.USERNAME_MESSAGE);
         imgbtns.add((ImageButton) findViewById(R.id.ibtn_1));
         imgbtns.add((ImageButton) findViewById(R.id.ibtn_2));
         imgbtns.add((ImageButton) findViewById(R.id.ibtn_3));
@@ -136,14 +143,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 {
                                     intent.putExtra(UNIT_MESSAGE, "Seconds");
                                     intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000)));
+                                    intent.putExtra(LoginActivity.USERNAME_MESSAGE,username);
                                 } else if (time > 60000 && time < 3600000)//less than an hour
                                 {
                                     intent.putExtra(UNIT_MESSAGE, "Minutes");
                                     intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000 * 60)));
+                                    intent.putExtra(LoginActivity.USERNAME_MESSAGE,username);
                                 } else if (time > 3600000)//more than an hour
                                 {
                                     intent.putExtra(UNIT_MESSAGE, "Hours");
                                     intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000 * 60 * 60)));
+                                    intent.putExtra(LoginActivity.USERNAME_MESSAGE,username);
                                 }
                                 startActivity(intent);
                                 finish();

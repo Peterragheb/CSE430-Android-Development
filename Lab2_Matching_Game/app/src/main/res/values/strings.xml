@@ -3,4 +3,8 @@
     <string name="congratulations">Congratulations</string>
     <string name="your_score">You scored</string>
     <string name="play_again">Play again</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="leaderboard">Leaderboard</string>
+
 </resources>
