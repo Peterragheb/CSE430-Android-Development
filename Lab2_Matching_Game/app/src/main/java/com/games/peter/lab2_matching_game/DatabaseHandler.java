@@ -12,7 +12,10 @@ import android.util.Log;
  */
 
 public class DatabaseHandler {
+
+
     private static final String TAG = "DBAdapter";
+    //=====================================
 
     // DB Fields
     public static final String KEY_ROWID = "_id";
@@ -32,9 +35,12 @@ public class DatabaseHandler {
     public static final String DATABASE_NAME = "Matching_game_db";
     public static final String DATABASE_TABLE = "users";
 
+    //=====================================
+
     // Track DB version
     public static final int DATABASE_VERSION = 1;
 
+    //=====================================
 
     private static final String DATABASE_CREATE_SQL =
             "create table " + DATABASE_TABLE
@@ -45,25 +51,34 @@ public class DatabaseHandler {
                     + KEY_DATE              + " string not null"
                     + ");";
 
+    //=====================================
+
     private final Context context;
     private DatabaseHelper myDBHelper;
     private SQLiteDatabase db;
+
+    //=====================================
 
     public DatabaseHandler(Context ctx) {
         this.context = ctx;
         myDBHelper = new DatabaseHelper(context);
     }
+    //=====================================
 
     // Open the database connection.
     public DatabaseHandler open() {
         db = myDBHelper.getWritableDatabase();
         return this;
     }
+    //=====================================
 
     // Close the database connection.
     public void close() {
         myDBHelper.close();
     }
+
+    //=====================================
+
     public long insertRow(String username, int score, String score_type, String date) {
         // [TO_DO_A8]
         // Update data in the row with new fields.
@@ -79,10 +94,16 @@ public class DatabaseHandler {
         return db.insert(DATABASE_TABLE, null, initialValues);
     }
 
+    //=====================================
+
+
     public boolean deleteRow(long rowId) {
         String where = KEY_ROWID + "=" + rowId;
         return db.delete(DATABASE_TABLE, where, null) != 0;
     }
+
+    //=====================================
+
 
     public void deleteAll() {
         Cursor c = getAllRows();
@@ -94,6 +115,10 @@ public class DatabaseHandler {
         }
         c.close();
     }
+
+
+    //=====================================
+
     public Cursor getAllRows() {
         String where = null;
         Cursor c = 	db.query(true, DATABASE_TABLE, ALL_KEYS,
@@ -104,6 +129,9 @@ public class DatabaseHandler {
         return c;
     }
 
+    //=====================================
+
+
     public Cursor getRow(long rowId) {
         String where = KEY_ROWID + "=" + rowId;
         Cursor c = 	db.query(true, DATABASE_TABLE, ALL_KEYS,
@@ -113,6 +141,9 @@ public class DatabaseHandler {
         }
         return c;
     }
+
+
+    //=====================================
 
     public boolean updateRow(long rowId, String username, int score, String score_type,String date) {
         String where = KEY_ROWID + "=" + rowId;
@@ -131,6 +162,11 @@ public class DatabaseHandler {
         // Insert it into the database.
         return db.update(DATABASE_TABLE, newValues, where, null) != 0;
     }
+
+    //=====================================
+
+
+    //database helper class to create and upgrade database
 
     private static class DatabaseHelper extends SQLiteOpenHelper
     {
@@ -155,5 +191,8 @@ public class DatabaseHandler {
             onCreate(_db);
         }
     }
+
+    //=====================================
+
 
 }

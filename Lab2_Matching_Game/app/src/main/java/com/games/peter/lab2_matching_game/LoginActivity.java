@@ -17,9 +17,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //=====================================
+        //assign variables
         et_username=findViewById(R.id.et_username);
         btn_login=findViewById(R.id.btn_login);
+        //=====================================
+
+        //Delete all users
         //deleteall();
+
+        //=====================================
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,21 +40,33 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        //======================================
 
     }
+
+
+    //delete allusers
     private void deleteall(){
         openDB();
         mydb.deleteAll();
     }
+
+
+    //open database
     private void openDB(){
         mydb=new DatabaseHandler(this);
         mydb.open();
     }
+
+
+    //close database
     private void closeDB(){
         if (mydb!=null)
             mydb.close();
     }
 
+
+    //on activity destroy
     @Override
     protected void onDestroy() {
         super.onDestroy();
