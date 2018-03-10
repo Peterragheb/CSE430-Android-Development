@@ -3,91 +3,90 @@ package com.games.peter.lab2_matching_game;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.util.ArrayList;
+import android.util.Log;
 
 /**
  * Created by peter on 3/6/18.
  */
 
-public class DatabaseHandler extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "Matching_game_db.db";
-    public static final String USERS_TABLE_NAME = "users";
-    public static final String USERS_COLUMN_ID = "id";
-    public static final String USERS_COLUMN_USERNAME = "username";
-    public static final String USERS_COLUMN_SCORE = "score";
-    public static final String[] ALL_KEYS = new String[] {USERS_COLUMN_ID, USERS_COLUMN_USERNAME, USERS_COLUMN_SCORE};
+public class DatabaseHandler {
+    private static final String TAG = "DBAdapter";
 
-    public DatabaseHandler(Context context) {
-        super(context, DATABASE_NAME , null, 1);
+    // DB Fields
+    public static final String KEY_ROWID = "_id";
+    public static final int COL_ROWID = 0;
+
+    public static final String KEY_USER_NAME = "username";
+    public static final String KEY_SCORE = "score";
+    public static final String KEY_SCORE_TYPE = "score_type";
+    public static final String KEY_DATE = "date_time";
+    public static final int COL_USERNAME = 1;
+    public static final int COL_SCORE = 2;
+    public static final int COL_SCORE_TYPE = 3;
+    public static final int COL_DATE = 4;
+
+    public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_USER_NAME, KEY_SCORE, KEY_SCORE_TYPE, KEY_DATE};
+
+    public static final String DATABASE_NAME = "Matching_game_db";
+    public static final String DATABASE_TABLE = "users";
+
+    // Track DB version
+    public static final int DATABASE_VERSION = 1;
+
+
+    private static final String DATABASE_CREATE_SQL =
+            "create table " + DATABASE_TABLE
+                    + " (" + KEY_ROWID      + " integer primary key autoincrement, "
+                    + KEY_USER_NAME         + " text not null, "
+                    + KEY_SCORE             + " integer not null, "
+                    + KEY_SCORE_TYPE             + " text not null, "
+                    + KEY_DATE              + " string not null"
+                    + ");";
+
+    private final Context context;
+    private DatabaseHelper myDBHelper;
+    private SQLiteDatabase db;
+
+    public DatabaseHandler(Context ctx) {
+        this.context = ctx;
+        myDBHelper = new DatabaseHelper(context);
     }
 
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(
-                "create table "+USERS_TABLE_NAME +
-                        " ("+USERS_COLUMN_ID +" integer primary key, "+USERS_COLUMN_USERNAME+" text, "+USERS_COLUMN_SCORE+" text)"
-        );
+    // Open the database connection.
+    public DatabaseHandler open() {
+        db = myDBHelper.getWritableDatabase();
+        return this;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+USERS_TABLE_NAME);
-        onCreate(sqLiteDatabase);
+    // Close the database connection.
+    public void close() {
+        myDBHelper.close();
+    }
+    public long insertRow(String username, int score, String score_type, String date) {
+        // [TO_DO_A8]
+        // Update data in the row with new fields.
+        // Also change the function's arguments to be what you need!
+        // Create row's data:
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(KEY_USER_NAME, username);
+        initialValues.put(KEY_SCORE, score);
+        initialValues.put(KEY_SCORE_TYPE, score_type);
+        initialValues.put(KEY_DATE, date);
 
+        // Insert it into the database.
+        return db.insert(DATABASE_TABLE, null, initialValues);
     }
 
-    public boolean insertUser (String username, String score) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(USERS_COLUMN_USERNAME, username);
-        if (score!=null)
-            contentValues.put(USERS_COLUMN_SCORE, score);
-        db.insert(USERS_TABLE_NAME, null, contentValues);
-        return true;
-    }
-
-    public Cursor getUserData(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from "+USERS_TABLE_NAME+"where id="+id+"", null );
-        return res;
-    }
-
-    public int numberOfRows(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, USERS_TABLE_NAME);
-        return numRows;
-    }
-
-    public boolean updateUser (Integer id, String username, String score) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        if (username!=null)
-            contentValues.put(USERS_COLUMN_USERNAME, username);
-        if (score!=null)
-            contentValues.put(USERS_COLUMN_SCORE, score);
-        db.update(USERS_TABLE_NAME, contentValues, "id = ? ", new String[] { Integer.toString(id) } );
-        return true;
-    }
-
-    public Integer deleteUser (Integer id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(USERS_TABLE_NAME,
-                "id = ? ",
-                new String[] { Integer.toString(id) });
-    }
     public boolean deleteRow(long rowId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String where = USERS_COLUMN_ID + "=" + rowId;
-        return db.delete(USERS_TABLE_NAME, where, null) != 0;
+        String where = KEY_ROWID + "=" + rowId;
+        return db.delete(DATABASE_TABLE, where, null) != 0;
     }
+
     public void deleteAll() {
         Cursor c = getAllRows();
-        long rowId = c.getColumnIndexOrThrow(USERS_COLUMN_ID);
+        long rowId = c.getColumnIndexOrThrow(KEY_ROWID);
         if (c.moveToFirst()) {
             do {
                 deleteRow(c.getLong((int) rowId));
@@ -95,28 +94,66 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         c.close();
     }
-    public ArrayList<User> getAllUsers() {
-        ArrayList<User> array_list = new ArrayList<User>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from "+USERS_TABLE_NAME, null );
-        res.moveToFirst();
-
-        while(!res.isAfterLast()){//need to add all user attributes
-            array_list.add(new User(res.getString(res.getColumnIndex(USERS_COLUMN_USERNAME)),
-                    res.getString(res.getColumnIndex(USERS_COLUMN_SCORE))));
-            res.moveToNext();
-        }
-        return array_list;
-    }
     public Cursor getAllRows() {
         String where = null;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = 	db.query(true, USERS_TABLE_NAME, ALL_KEYS,
+        Cursor c = 	db.query(true, DATABASE_TABLE, ALL_KEYS,
                 where, null, null, null, null, null);
         if (c != null) {
             c.moveToFirst();
         }
         return c;
     }
+
+    public Cursor getRow(long rowId) {
+        String where = KEY_ROWID + "=" + rowId;
+        Cursor c = 	db.query(true, DATABASE_TABLE, ALL_KEYS,
+                where, null, null, null, null, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
+    }
+
+    public boolean updateRow(long rowId, String username, int score, String score_type,String date) {
+        String where = KEY_ROWID + "=" + rowId;
+
+        // [TO_DO_A8]
+        // Update data in the row with new fields.
+        // Also change the function's arguments to be what you need!
+        // Create row's data:
+        ContentValues newValues = new ContentValues();
+        newValues.put(KEY_USER_NAME, username);
+        newValues.put(KEY_SCORE, score);
+        newValues.put(KEY_SCORE_TYPE, score_type);
+        newValues.put(KEY_DATE, date);
+
+
+        // Insert it into the database.
+        return db.update(DATABASE_TABLE, newValues, where, null) != 0;
+    }
+
+    private static class DatabaseHelper extends SQLiteOpenHelper
+    {
+        DatabaseHelper(Context context) {
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase _db) {
+            _db.execSQL(DATABASE_CREATE_SQL);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase _db, int oldVersion, int newVersion) {
+            Log.w(TAG, "Upgrading application's database from version " + oldVersion
+                    + " to " + newVersion + ", which will destroy all old data!");
+
+            // Destroy old database:
+            _db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
+
+            // Recreate new database:
+            onCreate(_db);
+        }
+    }
+
 }

@@ -15,6 +15,9 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public final static String SCORE_MESSAGE = "Score";
     public final static String UNIT_MESSAGE = "Unit";
+    public final static String SCORE_TYPE_MESSAGE_1 = "Seconds";
+    public final static String SCORE_TYPE_MESSAGE_2 = "Minutes";
+    public final static String SCORE_TYPE_MESSAGE_3 = "Hours";
     private ArrayList<ImageButton> imgbtns = new ArrayList<>();
     private ArrayList<Integer> randimges = new ArrayList<>();
     private ArrayList<ImageButton> clicked = new ArrayList<>();
@@ -141,17 +144,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 long time = Finishtime.getTime() - Startime.getTime();
                                 if (time < 60000)//less than a  minute
                                 {
-                                    intent.putExtra(UNIT_MESSAGE, "Seconds");
+                                    intent.putExtra(UNIT_MESSAGE, SCORE_TYPE_MESSAGE_1);
                                     intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000)));
                                     intent.putExtra(LoginActivity.USERNAME_MESSAGE,username);
                                 } else if (time > 60000 && time < 3600000)//less than an hour
                                 {
-                                    intent.putExtra(UNIT_MESSAGE, "Minutes");
+                                    intent.putExtra(UNIT_MESSAGE, SCORE_TYPE_MESSAGE_2);
                                     intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000 * 60)));
                                     intent.putExtra(LoginActivity.USERNAME_MESSAGE,username);
                                 } else if (time > 3600000)//more than an hour
                                 {
-                                    intent.putExtra(UNIT_MESSAGE, "Hours");
+                                    intent.putExtra(UNIT_MESSAGE, SCORE_TYPE_MESSAGE_3);
                                     intent.putExtra(SCORE_MESSAGE, (int) Math.ceil(time / (1000 * 60 * 60)));
                                     intent.putExtra(LoginActivity.USERNAME_MESSAGE,username);
                                 }

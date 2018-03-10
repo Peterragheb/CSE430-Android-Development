@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Matching Game</string>
-    <string name="congratulations">Congratulations</string>
+    <string name="congratulations"><b>Congratulations</b></string>
     <string name="your_score">You scored</string>
     <string name="play_again">Play again</string>
     <string name="username">Username</string>
     <string name="login">Login</string>
     <string name="leaderboard">Leaderboard</string>
-
+    <string name="scores">Leaderboard</string>
+    <string name="sub_title"><i>Learn and have fun!</i></string>
 </resources>
