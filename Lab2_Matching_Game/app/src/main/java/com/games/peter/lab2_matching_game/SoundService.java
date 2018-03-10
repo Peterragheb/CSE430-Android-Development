@@ -7,17 +7,26 @@ import android.os.IBinder;
 
 
 public class SoundService extends Service {
+    //=====================================
+
     MediaPlayer player;
     int audio_id;
+
+    //=====================================
+
     @Override
     public IBinder onBind(Intent intent) {
 
         return null;
     }
 
+    //=====================================
+
+
     public void onCreate() {
 
     }
+    //=====================================
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         audio_id= intent.getIntExtra("audio_id", -1);
@@ -26,6 +35,8 @@ public class SoundService extends Service {
         player.start();
         return Service.START_NOT_STICKY;
     }
+    //=====================================
+
 
     public void onDestroy() {
         player.stop();
@@ -34,5 +45,6 @@ public class SoundService extends Service {
         stopSelf();
         super.onDestroy();
     }
+    //=====================================
 
 }
