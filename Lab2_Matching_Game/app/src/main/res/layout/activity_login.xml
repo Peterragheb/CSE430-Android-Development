@@ -48,26 +48,29 @@
         android:layout_height="0dp"
         android:layout_weight="0.2"
         android:layout_gravity="center"
-        android:text="@string/sub_title"/>
+        android:text="@string/sub_title"
+        android:textColor="@color/Grey_blue"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
         ></View>
+
     <EditText
         android:id="@+id/et_username"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:inputType="text"
-        android:hint="@string/username"
-        android:textColorHint="@android:color/white"
-        android:textColor="@android:color/white"
-        android:fontFamily="sans-serif-light"
+        android:layout_weight="0.6"
         android:background="@drawable/edittext"
         android:drawableLeft="@mipmap/ic_user"
         android:drawablePadding="2pt"
-        android:paddingRight="5dp"/>
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/username"
+        android:inputType="text"
+        android:paddingRight="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:maxLength="12"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"

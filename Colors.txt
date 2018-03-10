@@ -7,3 +7,10 @@
     <color name="light_blue">#2196f6</color>
     <color name="off_white">#ffffef</color>
     <color name="DarkGrey">#333333</color>
+    <color name="dark_blue">#01579B</color>
+    <color name="shadow_lighter_color">#64000000</color>
+    <color name="Saumon">#FFAE8C</color>
+    <color name="mustard">#FFE38C</color>
+    <color name="baby_blue">#A0DDE6</color>
+    <color name="paste_green">#ADF7B6</color>
+    <color name="pale_blue">#90CAF9</color>
