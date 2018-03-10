@@ -18,27 +18,42 @@ public class LeaderboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
+        //=====================================
+        //assign variables
         listView = (ListView) findViewById(R.id.list);
+        //=====================================
+        //open database
         openDB();
+
+        //=====================================
+        //display all users
         displayRecordSet(mydb.getAllRows());
-        // Assign adapter to ListView
 
     }
+
+    //open database
     private void openDB(){
         mydb=new DatabaseHandler(this);
         mydb.open();
     }
+
+
+    //close database
     private void closeDB(){
         if (mydb!=null)
             mydb.close();
     }
 
+
+    //on activity destroy
     @Override
     protected void onDestroy() {
         super.onDestroy();
         closeDB();
     }
 
+
+    //display all records
     private void displayRecordSet(Cursor cursor) {
         String message = "";
         users=new ArrayList<>();
@@ -53,6 +68,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                 int score = cursor.getInt(mydb.COL_SCORE);
                 String score_type = cursor.getString(mydb.COL_SCORE_TYPE);
                 String date = cursor.getString(mydb.COL_DATE);
+                //=====================================
 
                 // Append data to the message:
                 message = "id=" + id
@@ -63,23 +79,26 @@ public class LeaderboardActivity extends AppCompatActivity {
                         +"\n";
                 Log.d(TAG,message);
                 Log.d(TAG,"---------------------");
+                //=====================================
 
-                // [TO_DO_B6]
-                // Create arraylist(s)? and use it(them) in the list view
+                //add users to arraylist
                 users.add(new User(username,score,score_type,date));
             } while(cursor.moveToNext());
         }
+        //=====================================
 
         // Close the cursor to avoid a resource leak.
         cursor.close();
+        //=====================================
+        //sort list of users according to the score
         Collections.sort(users);
+        //=====================================
+        //creating new custom adapter
         CustomAdapter adapter = new CustomAdapter(this, users);
-
-        // [TO_DO_B7]
-        // Update the list view
+        //binding adapter to the listview
         listView.setAdapter(adapter);
-        // [TO_DO_B8]
-        // Display a Toast message
+        //=====================================
+
     }
 
 }
