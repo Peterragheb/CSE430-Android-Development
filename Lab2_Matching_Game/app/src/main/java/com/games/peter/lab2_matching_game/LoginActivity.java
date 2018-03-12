@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!et_username.getText().toString().isEmpty()){
                     String username=et_username.getText().toString();
-                    //dbHandler.insertUser(username,null);
                     Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                     intent.putExtra(USERNAME_MESSAGE,username);
                     startActivity(intent);

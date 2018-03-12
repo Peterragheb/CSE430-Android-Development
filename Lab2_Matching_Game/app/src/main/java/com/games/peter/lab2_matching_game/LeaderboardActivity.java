@@ -94,7 +94,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         Collections.sort(users);
         //=====================================
         //creating new custom adapter
-        CustomAdapter adapter = new CustomAdapter(this, users);
+        //CustomAdapter adapter = new CustomAdapter(this, users);
+
+        CustomAdapter adapter = new CustomAdapter(this,R.layout.listview, users);
         //binding adapter to the listview
         listView.setAdapter(adapter);
         //=====================================

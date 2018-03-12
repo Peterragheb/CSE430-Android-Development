@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
-        android:layout_weight="0.5"
+        android:layout_weight="0.6"
         android:textSize="25sp"
         android:text="@string/your_score"
         android:textColor="@color/watermelon"/>
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
-        android:layout_weight="0.5"
+        android:layout_weight="0.6"
         android:textSize="25sp"
         android:text=""
         android:textColor="@color/orange2"/>

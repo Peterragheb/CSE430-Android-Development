@@ -35,9 +35,9 @@ public class CustomAdapter extends ArrayAdapter<User> {
     //=====================================
 
     //constructor
-    public CustomAdapter(Context context, ArrayList<User> items) {
+    public CustomAdapter(Context context, int resource, ArrayList<User> items) {
         //Todo change layout here
-        super(context, R.layout.userview, items);
+        super(context,resource, items);
         inflater = LayoutInflater.from(context);
         this.users = items;
     }
@@ -87,29 +87,19 @@ public class CustomAdapter extends ArrayAdapter<User> {
         //=====================================
 
         if (view == null) {
-
-            if (position==0){//if the user is in the first row
-                vh = new ViewHolder();
-                LayoutInflater inflater = LayoutInflater.from(getContext());
+            vh = new ViewHolder();
+            inflater = LayoutInflater.from(getContext());
+            //=====================================
+            if (position==0)//if the user is in the first row
                 view = inflater.inflate(R.layout.top_score, parent, false);
-                vh.username = (TextView) view.findViewById(R.id.tv_username);
-                vh.score = (TextView) view.findViewById(R.id.tv_score);
-                vh.date = (TextView) view.findViewById(R.id.tv_date);
-                view.setTag(vh);
-            }
             //=====================================
-
-            else {
-                vh = new ViewHolder();
-                LayoutInflater inflater = LayoutInflater.from(getContext());
+            else
                 view = inflater.inflate(R.layout.score_row, parent, false);
-                vh.username = (TextView) view.findViewById(R.id.tv_username);
-                vh.score = (TextView) view.findViewById(R.id.tv_score);
-                vh.date = (TextView) view.findViewById(R.id.tv_date);
-                view.setTag(vh);
-            }
             //=====================================
-
+            vh.username = (TextView) view.findViewById(R.id.tv_username);
+            vh.score = (TextView) view.findViewById(R.id.tv_score);
+            vh.date = (TextView) view.findViewById(R.id.tv_date);
+            view.setTag(vh);
 
         }
         //=====================================

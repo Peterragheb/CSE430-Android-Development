@@ -18,8 +18,7 @@ public class ResultActivity extends AppCompatActivity {
     Button btn_play_again;
     Button btn_leaderboard;
     private Intent AudioIntent;
-    DatabaseHandler dbHandler;
-    static boolean checkFirstTime=true;
+    private static boolean checkFirstTime=true;
     private static String username;
     private int score;
     private String score_type;
@@ -59,8 +58,6 @@ public class ResultActivity extends AppCompatActivity {
             DateFormat df = new SimpleDateFormat("d/MM/yyyy, h:mm a");
             String date = df.format(Calendar.getInstance().getTime());
             long indx=mydb.insertRow(username,score,score_type,date);
-            //dbHandler=new DatabaseHandler(this);
-            //dbHandler.insertUser(username,score);
         }
         //=====================================
         checkFirstTime=false;
@@ -91,18 +88,28 @@ public class ResultActivity extends AppCompatActivity {
         //=====================================
 
     }
+    //=====================================
 
     //open database
     private void openDB(){
         mydb=new DatabaseHandler(this);
         mydb.open();
     }
+    //=====================================
 
     //close database
     private void closeDB(){
         if (mydb!=null)
             mydb.close();
     }
+    //=====================================
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        checkFirstTime=true;
+    }
+    //=====================================
 
     //destroy activity
     @Override
@@ -110,4 +117,5 @@ public class ResultActivity extends AppCompatActivity {
         super.onDestroy();
         closeDB();
     }
+    //=====================================
 }
