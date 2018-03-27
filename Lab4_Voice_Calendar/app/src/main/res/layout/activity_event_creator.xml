@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.games.peter.lab4_voice_calendar.EventCreatorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/button"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:divider="@drawable/divider"
+        android:showDividers="middle">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:background="@drawable/button"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:drawableLeft="@drawable/ic_delete"/>
+
+        <Button
+            android:id="@+id/btn_done"
+            style="?android:attr/buttonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button"
+            android:text="Done"
+            android:textColor="@android:color/white"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:drawableLeft="@drawable/ic_check"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="5">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.02"/>
+        <EditText
+            android:id="@+id/et_event_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.02" />
+
+        <TextView
+            android:id="@+id/tv_event_picked_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.02" />
+
+        <TextView
+            android:id="@+id/tv_event_picked_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

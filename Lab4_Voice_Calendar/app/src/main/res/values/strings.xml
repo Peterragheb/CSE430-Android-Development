@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Voice Calendar</string>
+    <string name="sub_title"><i>Tap on the mic to schedule event</i></string>
+</resources>
