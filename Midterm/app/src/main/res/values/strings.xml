@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Midterm</string>
+    <string name="quiz">QUIZ</string>
+    <string name="question">Q1:How to get a response from an activity in Android?</string>
+    <string name="option1">A - startActivityToResult()</string>
+    <string name="option2">B - startActivityForResult()</string>
+    <string name="option3">C - Bundle</string>
+    <string name="option4">D - None of the above</string>
+    <string name="answer">Answer</string>
+</resources>
