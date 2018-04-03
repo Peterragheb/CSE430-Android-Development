@@ -10,3 +10,5 @@ This is android Development course.
 3] Lab 3 "Matching Game Database" Added 06/3/2018 
 
 4] Lab 4 "Voice Calendar" Added 13/3/2018 
+
+5] Lab 5 "Pedometer" Added 27/3/2018 
