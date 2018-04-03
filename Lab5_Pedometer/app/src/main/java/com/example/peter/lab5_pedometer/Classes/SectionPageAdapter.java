@@ -1,4 +1,4 @@
-package com.example.peter.lab5_pedometer;
+package com.example.peter.lab5_pedometer.Classes;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

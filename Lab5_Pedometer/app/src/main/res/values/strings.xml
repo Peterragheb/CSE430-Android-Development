@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Lab5_Pedometer</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
+    <string name="tab_text_1">Today</string>
+    <string name="tab_text_2">Standings</string>
+    <string name="tab_text_3">Settings</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="welcome_message">Would you like to set your Body Weight and Step length? <br/> <b> Note: </b> If you don\'t set them they will be set to default.</string>
 </resources>

@@ -1,11 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
-    android:id="@+id/tv_tab3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:text="Tab 3"/>
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/row_background">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.5">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_ruler2"
+                android:drawablePadding="5dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:text="Step Size "/>
+            <EditText
+                android:id="@+id/et_step_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:inputType="number"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:hint="Cm"
+                android:textColorHint="#33ffffff"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.5">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:drawableLeft="@drawable/ic_weight"
+                android:drawablePadding="5dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:text="Body Weight"/>
+            <EditText
+                android:id="@+id/et_body_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:hint="Kg"
+                android:textColorHint="#33ffffff"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.175"/>
+    <Button
+        android:id="@+id/btn_save_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:text="Save"
+        android:background="@drawable/btn_save"
+        android:layout_gravity="center" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.975"/>
 </LinearLayout>

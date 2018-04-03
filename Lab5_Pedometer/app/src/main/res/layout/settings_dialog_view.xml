@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/row_background">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.5">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:text="Step Size "/>
+            <EditText
+                android:id="@+id/et_setup_step_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:inputType="number"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:hint="Cm"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.5">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:text="Body Weight"/>
+            <EditText
+                android:id="@+id/et_setup_body_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:hint="Kg"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.175"/>
+    <Button
+        android:id="@+id/btn_setup_save_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="Save"
+        android:background="@drawable/btn_save_setup"
+        android:layout_gravity="center" />
+</LinearLayout>
