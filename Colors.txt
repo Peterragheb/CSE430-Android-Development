@@ -14,3 +14,5 @@
     <color name="baby_blue">#A0DDE6</color>
     <color name="paste_green">#ADF7B6</color>
     <color name="pale_blue">#90CAF9</color>
+    <color name="navy_blue">#224471</color>
+    <color name="darkDeepOrange">#E64A19</color>
