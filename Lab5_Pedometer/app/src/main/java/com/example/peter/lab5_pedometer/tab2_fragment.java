@@ -35,13 +35,6 @@ public class tab2_fragment extends Fragment implements UiUpdateTrigger.ChangeLis
         openDB();
         displayRecordSet();
         tab1_fragment.uiUpdateTrigger.setListener(this);
-//        records.add(new Record(Calendar.getInstance().getTime(), 1200,500,1.2f,1.5f));
-//        records.add(new Record(Calendar.getInstance().getTime(), 200,100,0.2f ,3.2f));
-//        records.add(new Record(Calendar.getInstance().getTime(), 2200,700,2.2f ,1f));
-//        records.add(new Record(Calendar.getInstance().getTime(), 5500,1500,3.2f, 5f));
-//        CustomAdapter customAdapter=new CustomAdapter(view.getContext(),R.layout.record_row,records);
-        //ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(view.getContext(),R.layout.record_row,R.id.tv_record_date,dates);
-        //lv_records.setAdapter(customAdapter);
         return view;
     }
 

@@ -42,14 +42,10 @@ public class tab1_fragment extends Fragment implements SensorEventListener, Step
     private Sensor accel;
     private int numSteps;
     long elapsedTime;
-    long return_temp ;
-    float distance;
-    float calories;
+    float distance,calories, TotalDistanceLastMin, speed;
     public static int step_length;
     int numberof_ticks=0;
     public static float bodyMassKg;
-    float TotalDistanceLastMin;
-    float speed;
     public static boolean STATE_STARTED=false,PAUSED=false;
     public static UiUpdateTrigger uiUpdateTrigger=new UiUpdateTrigger();
     DBAdapter dbAdapter;
@@ -57,6 +53,16 @@ public class tab1_fragment extends Fragment implements SensorEventListener, Step
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.tab1_fragment,container,false);
+        initializeUIfields(view);
+        openDB();
+        resetFields();
+        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        simpleStepDetector = new StepDetector();
+        assignListeners();
+        return view;
+    }
+    private void initializeUIfields(View view){
         tv_step_counter=view.findViewById(R.id.tv_step_counter);
         tv_burnt_calories_count=view.findViewById(R.id.tv_burnt_calories_count);
         cm_time_count=view.findViewById(R.id.cm_time_count);
@@ -66,20 +72,12 @@ public class tab1_fragment extends Fragment implements SensorEventListener, Step
         ibtn_pause_counting=view.findViewById(R.id.ibtn_pause_counting);
         ibtn_stop_counting=view.findViewById(R.id.ibtn_stop_counting);
         v_between_pause_stop=view.findViewById(R.id.v_between_pause_stop);
-        openDB();
+    }
+    private void resetFields(){
         tv_step_counter.setText("0");
         tv_burnt_calories_count.setText("0");
         tv_distance_count.setText("0.00");
         tv_speed_count.setText("0.00");
-        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        simpleStepDetector = new StepDetector();
-        simpleStepDetector.registerListener(this);
-        btn_start_counting.setOnClickListener(this);
-        ibtn_pause_counting.setOnClickListener(this);
-        ibtn_stop_counting.setOnClickListener(this);
-        cm_time_count.setOnChronometerTickListener(this);
-        MainActivity.sharedVar.addListener(this);
         distance=0;
         numSteps = 0;
         calories = 0;
@@ -87,9 +85,15 @@ public class tab1_fragment extends Fragment implements SensorEventListener, Step
         TotalDistanceLastMin=0;
         step_length=MainActivity.sharedVar.getStep_length();
         bodyMassKg=MainActivity.sharedVar.getBody_weight();
-        return view;
     }
-
+    private void assignListeners(){
+        simpleStepDetector.registerListener(this);
+        btn_start_counting.setOnClickListener(this);
+        ibtn_pause_counting.setOnClickListener(this);
+        ibtn_stop_counting.setOnClickListener(this);
+        cm_time_count.setOnChronometerTickListener(this);
+        MainActivity.sharedVar.addListener(this);
+    }
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -100,7 +104,6 @@ public class tab1_fragment extends Fragment implements SensorEventListener, Step
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     @Override
@@ -130,18 +133,9 @@ public class tab1_fragment extends Fragment implements SensorEventListener, Step
             cm_time_count.setBase(SystemClock.elapsedRealtime());
             cm_time_count.start();
         }else {
-//            if(return_temp!=0){
-//                cm_time_count.setBase(return_temp+SystemClock.elapsedRealtime());
-//                return_temp=0;
-//                cm_time_count.start();
-//                PAUSED=false;
-//            }
-//            else{
                 cm_time_count.setBase(cm_time_count.getBase()+SystemClock.elapsedRealtime()-elapsedTime);
                 cm_time_count.start();
                 PAUSED=false;
-           // }
-
         }
         btn_start_counting.setVisibility(View.GONE);
         ibtn_pause_counting.setVisibility(View.VISIBLE);
@@ -169,12 +163,7 @@ public class tab1_fragment extends Fragment implements SensorEventListener, Step
         ibtn_stop_counting.setVisibility(View.GONE);
         v_between_pause_stop.setVisibility(View.GONE);
         sensorManager.unregisterListener(tab1_fragment.this);
-
         if (!cancel){
-//            float metersWalkedInAMin =distance-TotalDistanceLastMin;
-//            calories+= 0.0005 * bodyMassKg * metersWalkedInAMin + 0.0035;
-//            speed=metersWalkedInAMin*60;
-            //store in database the record
             Record record;
             if (Integer.valueOf(tv_step_counter.getText().toString())!=0){
                 record=new Record(Calendar.getInstance().getTime(),
@@ -187,7 +176,6 @@ public class tab1_fragment extends Fragment implements SensorEventListener, Step
                 Toast.makeText(getContext(),"Run added to standing",Toast.LENGTH_SHORT).show();
                 uiUpdateTrigger.setUpdated(true);
             }
-
         }
         numSteps=0;
         calories=0;
@@ -210,82 +198,11 @@ public class tab1_fragment extends Fragment implements SensorEventListener, Step
         if (dbAdapter!=null)
             dbAdapter.close();
     }
-//    @Override
-//    public void onPause() {
-//        Log.v("ACTIVE:","onPause()");
-//        Pause();
-//        //saveState();
-//        super.onPause();
-//    }
-    @Override
-    public void onDestroyView() {
-        Log.v("ACTIVE:","onDestroyView()");
-        super.onDestroyView();
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         closeDB();
     }
-    @Override
-    public void onStart() {
-        Log.v("ACTIVE:","onStart()");
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        Log.v("ACTIVE:","onStop()");
-        super.onStop();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.v("ACTIVE:","onActivityCreated()");
-        //restoreState();
-    }
-//    public ContentValues saveState(){
-//        ContentValues contentValues=new ContentValues();
-//        contentValues.put("STEPS",Integer.valueOf(tv_step_counter.getText().toString()));
-//        contentValues.put("CALORIES",Float.valueOf(tv_burnt_calories_count.getText().toString()));
-//        contentValues.put("DISTANCE",Float.valueOf(tv_distance_count.getText().toString()));
-//        contentValues.put("BASE_TIME",cm_time_count.getBase()-SystemClock.elapsedRealtime());//hnak b2a agib el elapsed realtime we a3mlo add 3ala el value di
-//        contentValues.put("START_STATE",btn_start_counting.getVisibility());
-//        contentValues.put("PAUSE_STATE",ibtn_pause_counting.getVisibility());
-//        contentValues.put("STOP_STATE",ibtn_stop_counting.getVisibility());
-//        contentValues.put("VIEW_STATE",v_between_pause_stop.getVisibility());
-//        contentValues.put("RESUME",PAUSED);
-//        contentValues.put("DUMMY_TIME_TEXT","--:--");
-//        contentValues.put("NUMBER_OF_TICKS",numberof_ticks);
-//        contentValues.put("LAST_METERS_IN_MIN",TotalDistanceLastMin);
-//        contentValues.put("CALORIES_VAR",calories);
-//        contentValues.put("SPEED",Float.valueOf(tv_speed_count.getText().toString()));
-//        contentValues.put("SPEED_VAR",speed);
-//        return contentValues;
-//    }
-//    public void restoreState(ContentValues contentValues){
-//        tv_step_counter.setText(contentValues.getAsInteger("STEPS")+"");
-//        tv_burnt_calories_count.setText(contentValues.getAsFloat("CALORIES")+"");
-//        tv_distance_count.setText(contentValues.getAsFloat("DISTANCE")+"");
-//       // cm_time_count.setBase(contentValues.getAsLong("BASE_TIME")+SystemClock.elapsedRealtime());//e7tmal akon lazm agib el elapsed lama akon bados start msh nw
-//        btn_start_counting.setVisibility(contentValues.getAsInteger("START_STATE"));
-//        ibtn_pause_counting.setVisibility(contentValues.getAsInteger("PAUSE_STATE"));
-//        ibtn_stop_counting.setVisibility(contentValues.getAsInteger("STOP_STATE"));
-//        v_between_pause_stop.setVisibility(contentValues.getAsInteger("VIEW_STATE"));
-//        PAUSED=contentValues.getAsBoolean("RESUME");
-//        cm_time_count.setText(contentValues.getAsString("DUMMY_TIME_TEXT"));
-//        return_temp=contentValues.getAsLong("BASE_TIME");
-//        numSteps=contentValues.getAsInteger("STEPS");
-//        distance=contentValues.getAsFloat("DISTANCE");
-//        numberof_ticks=contentValues.getAsInteger("NUMBER_OF_TICKS");
-//        TotalDistanceLastMin=contentValues.getAsFloat("LAST_METERS_IN_MIN");
-//        calories=contentValues.getAsFloat("CALORIES_VAR");
-//        tv_speed_count.setText(contentValues.getAsFloat("SPEED")+"");
-//        speed=contentValues.getAsFloat("SPEED_VAR");
-//    }
-
 
     @Override
     public void onChronometerTick(Chronometer chronometer) {

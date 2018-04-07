@@ -43,12 +43,6 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         setupViewPage(viewPager);
         TabLayout tabLayout=findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-        if (savedInstanceState != null) {
-            //Restore the fragment's instance
-            mtab1_fragment =(tab1_fragment) getSupportFragmentManager().getFragment(savedInstanceState, "mtab1_fragment");
-            mtab2_fragment =(tab2_fragment) getSupportFragmentManager().getFragment(savedInstanceState, "mtab2_fragment");
-            mtab3_fragment =(tab3_fragment) getSupportFragmentManager().getFragment(savedInstanceState, "mtab3_fragment");
-        }
         tabLayout.addOnTabSelectedListener(this);
         Log.v("temp_step_length",temp_step_length+"");
         Log.v("temp_body_weight",temp_body_weight+"");
@@ -56,11 +50,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             display_WelcomeDialog(this);
         temp_step_length=prefs.getInt(MY_PREFS_STEP_SIZE,0) ;
         temp_body_weight=prefs.getInt(MY_PREFS_BODY_WEIGHT,0);
-        Log.v("temp_step_length after",temp_step_length+"");
-        Log.v("temp_body_weight after",temp_body_weight+"");
         sharedVar.setVariables(temp_step_length,temp_body_weight);
-        Log.v("STEP LENGTH",sharedVar.getStep_length()+"");
-        Log.v("BODY WEIGHT",sharedVar.getBody_weight()+"");
     }
 
     private void display_WelcomeDialog(final Context context){
@@ -196,43 +186,22 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-//        if (tab.getPosition()==1){
-//            mtab2_fragment.displayRecordSet();
-//        }
-//        if (tab.getPosition()==0){
-//            if (contentValues!=null){
-//                mtab1_fragment.restoreState(contentValues);
-//                contentValues=null;
-//            }
-//
-//        }
     }
 
     @Override
     public void onTabUnselected(TabLayout.Tab tab) {
         if (tab.getPosition()==0){
-//            start_State=mtab1_fragment.getStartState();
-//            step_count=mtab1_fragment.getNumSteps();
            if (tab1_fragment.STATE_STARTED){
                tab1_fragment.STATE_STARTED=false;
                if (!tab1_fragment.PAUSED) {
                    mtab1_fragment.Pause();
                }
-               //contentValues=mtab1_fragment.saveState();
            }
-            //contentValues=mtab1_fragment.saveState();
         }
     }
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
-//        if (tab.getPosition()==0){
-//            if (contentValues!=null){
-//                mtab1_fragment.restoreState(contentValues);
-//                contentValues=null;
-//            }
-//
-//        }
     }
 
     @Override
@@ -254,11 +223,6 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        //Save the fragment's instance
-        //getSupportFragmentManager().putFragment(outState, "mtab1_fragment", mtab1_fragment);
-        //getSupportFragmentManager().putFragment(outState, "mtab2_fragment", mtab2_fragment);
-        //getSupportFragmentManager().putFragment(outState, "mtab3_fragment", mtab3_fragment);
     }
 
 }
