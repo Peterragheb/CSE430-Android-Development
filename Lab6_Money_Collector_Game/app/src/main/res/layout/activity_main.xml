@@ -16,6 +16,7 @@
             android:layout_height="match_parent" />
 
         <LinearLayout
+            android:id="@+id/linl_top_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -25,40 +26,64 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1" />
+                android:layout_weight="0.5" />
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
+                android:text="Left:"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:text="Visited:" />
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/tv_remaining_coins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/darkDeepOrange"
+                android:textSize="20sp" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1" />
+                android:layout_weight="0.5" />
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
+                android:text="Score:"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:text="Score:" />
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="10"
+                android:textColor="@color/darkDeepOrange"
+                android:textSize="20sp" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1" />
+                android:layout_weight="0.5" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/linl_bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -75,7 +100,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@android:color/black"
+                android:textColor="@color/darkDeepOrange"
                 android:textSize="20sp"
                 android:text="Welcome to Money Collector Game" />
             <TextView
@@ -86,9 +111,9 @@
                 android:layout_marginBottom="15dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@android:color/black"
+                android:textColor="@color/navy_blue"
                 android:textSize="20sp"
-                android:text="Try to collect " />
+                android:text="Collect all the coins " />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,14 +122,16 @@
                 android:layout_marginBottom="15dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@android:color/black"
+                android:textColor="@color/darkDeepOrange"
                 android:textSize="20sp"
                 android:text="Have Fun! " />
             <Button
+                android:id="@+id/btn_start_game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/button_background"
+                android:textColor="@android:color/white"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
                 android:text="Start Game"/>
@@ -112,6 +139,121 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"/>
 
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linl_bottom_congrat_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@drawable/bottom_tab_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/darkDeepOrange"
+                android:textSize="20sp"
+                android:text="Congratulations You have Won!!" />
+
+            <Button
+                android:id="@+id/btn_show_leaderboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_background"
+                android:textColor="@android:color/white"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Show Leaderboard"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+            <Button
+                android:id="@+id/btn_restart_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_background"
+                android:textColor="@android:color/white"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Restart Game"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linl_records_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bottom_tab_background"
+            android:visibility="gone">
+            <ListView
+                android:id="@+id/lv_records"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ListView>
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="end|bottom"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:clickable="true"
+            app:backgroundTint="@color/navy_blue"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/ic_settings" />
+        <LinearLayout
+            android:id="@+id/linl_middle_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="@drawable/middle_settings_background"
+            android:visibility="invisible">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Coins Number per Polygon"/>
+            <EditText
+                android:id="@+id/et_coin_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:inputType="number"
+                android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/btn_submit_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:textColor="@android:color/white"
+                android:text="Submit"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:layout_gravity="center"/>
         </LinearLayout>
     </FrameLayout>
 

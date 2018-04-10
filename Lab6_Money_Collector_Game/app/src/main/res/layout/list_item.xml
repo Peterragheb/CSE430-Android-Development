@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:paddingBottom="25dp"
+    android:paddingTop="25dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_marginBottom="20dp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"/>
+    <TextView
+        android:id="@+id/tv_record_date"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:textColor="@color/navy_blue"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Today"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="0.7" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/navy_blue"
+            android:text="Score:"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1" />
+        <TextView
+            android:id="@+id/tv_record_score"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/darkDeepOrange"
+            android:text="5000"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/navy_blue"
+            android:text="Coins:"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1" />
+        <TextView
+            android:id="@+id/tv_record_coins"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/darkDeepOrange"
+            android:text="354"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3" />
+
+</LinearLayout>
