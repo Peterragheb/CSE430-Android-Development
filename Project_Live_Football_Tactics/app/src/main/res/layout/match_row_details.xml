@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground">
+    <FrameLayout
+        android:id="@+id/fl_time_stat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:padding="4dp">
+        <ImageView
+            android:id="@+id/iv_match_time_circle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/circle5"/>
+        <TextView
+            android:id="@+id/tv_match_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text="40'"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_score_stat"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:padding="5dp"
+        android:layout_marginLeft="4dp"
+        android:orientation="vertical"
+        android:background="#1A333333">
+        <TextView
+            android:id="@+id/tv_match_home_score"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/tv_match_away_score"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:layout_marginLeft="4dp"
+        android:padding="5dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_match_home_team"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Barcelona"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/tv_match_away_team"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Real Madrid"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+</LinearLayout>

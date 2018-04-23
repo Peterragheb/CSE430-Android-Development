@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.games.peter.project_live_football_tactics.MainActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Foottalks"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title" />
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center"
+            android:src="@drawable/chat_icon"/>
+    </android.support.v7.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include
+                layout="@layout/cardview_league_matches_list"
+                android:id="@+id/cv_league1_matches_list" />
+            <include
+                layout="@layout/cardview_league_matches_list"
+                android:id="@+id/cv_league2_matches_list" />
+            <include
+                layout="@layout/cardview_league_matches_list"
+                android:id="@+id/cv_league3_matches_list" />
+            <include
+                layout="@layout/cardview_league_matches_list"
+                android:id="@+id/cv_league4_matches_list" />
+            <include
+                layout="@layout/cardview_league_matches_list"
+                android:id="@+id/cv_league5_matches_list" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
+
