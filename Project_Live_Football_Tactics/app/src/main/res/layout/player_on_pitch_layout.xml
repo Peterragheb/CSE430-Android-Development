@@ -9,8 +9,9 @@
         android:layout_weight="1"/>
 <LinearLayout
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="2">
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,9 +31,11 @@
 
     <TextView
         android:id="@+id/tv_player_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Player1"/>
+        android:gravity="center"
+        android:maxLines="6"
+        android:text="Player1 asasasasas"/>
 </LinearLayout>
     <View
         android:layout_width="0dp"

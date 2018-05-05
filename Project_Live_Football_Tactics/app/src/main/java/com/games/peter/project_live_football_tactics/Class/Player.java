@@ -1,6 +1,9 @@
 package com.games.peter.project_live_football_tactics.Class;
 
-public class Player {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Player implements Parcelable {
     private int row;
     private int col;
     private String name;
@@ -55,4 +58,39 @@ public class Player {
         this.team_id = team_id;
     }
     //======================================================
+
+    protected Player(Parcel in) {
+        row = in.readInt();
+        col = in.readInt();
+        name = in.readString();
+        shirtNumber = in.readInt();
+        team_id = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(row);
+        dest.writeInt(col);
+        dest.writeString(name);
+        dest.writeInt(shirtNumber);
+        dest.writeInt(team_id);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
+        @Override
+        public Player createFromParcel(Parcel in) {
+            return new Player(in);
+        }
+
+        @Override
+        public Player[] newArray(int size) {
+            return new Player[size];
+        }
+    };
 }

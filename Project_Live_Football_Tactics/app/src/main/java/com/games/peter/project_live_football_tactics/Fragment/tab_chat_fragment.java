@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -46,6 +48,7 @@ public class tab_chat_fragment extends Fragment implements View.OnClickListener 
     private String fixture_id;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
+    Animation anim_scale_up,anim_scale_down;
     DatabaseReference chatRoom ;
     ArrayList<Message> messages=new ArrayList<>();
     //===============================================================================================================
@@ -61,6 +64,8 @@ public class tab_chat_fragment extends Fragment implements View.OnClickListener 
         btn_send_message=view.findViewById(R.id.button_chatbox_send);
         et_message_box=view.findViewById(R.id.edittext_chatbox);
         btn_send_message.setOnClickListener(this);
+        anim_scale_up = AnimationUtils.loadAnimation(this.getContext(), R.anim.scale_up);
+        anim_scale_down = AnimationUtils.loadAnimation(this.getContext(), R.anim.scale_down);
         mMessageRecycler =  view.findViewById(R.id.reyclerview_message_list);
         mMessageAdapter = new MessageListAdapter(view.getContext(), messages, onItemClickCallback);
 
@@ -147,10 +152,17 @@ public class tab_chat_fragment extends Fragment implements View.OnClickListener 
     private OnItemClickListener.OnItemClickCallback onItemClickCallback = new OnItemClickListener.OnItemClickCallback() {
         @Override
         public void onItemClicked(View time, View view, int position) {
-            if (time.getVisibility()==View.VISIBLE)
+            if (time.getVisibility()==View.VISIBLE){
+                time.startAnimation(anim_scale_down);
                 time.setVisibility(View.INVISIBLE);
-            else
+
+            }
+
+            else{
+                time.startAnimation(anim_scale_up);
                 time.setVisibility(View.VISIBLE);
+            }
+
         }
     };
     //======================================================

@@ -2,7 +2,6 @@ package com.games.peter.project_live_football_tactics.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,8 @@ import com.games.peter.project_live_football_tactics.Class.Message;
 import com.games.peter.project_live_football_tactics.Listener.OnItemClickListener;
 import com.games.peter.project_live_football_tactics.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -104,7 +105,8 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
             // Format the stored timestamp into a readable String using method.
             //timeText.setText(new SimpleDateFormat("MM/dd/yyyy").format(new Date(message.getCreatedAt())));
-            timeText.setText(DateUtils.formatDateTime(mContext,message.getCreatedAt(),0));
+            //timeText.setText(DateUtils.formatDateTime(mContext,message.getCreatedAt(),0));
+            timeText.setText(new SimpleDateFormat("hh:mm a").format(new Date(message.getCreatedAt())));
             Log.v("SETTING_MSG","CREATE NEW MSG");
         }
     }
@@ -127,7 +129,8 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
             // Format the stored timestamp into a readable String using method.
             //timeText.setText(new SimpleDateFormat("MM/dd/yyyy").format(new Date(message.getCreatedAt())));
-            timeText.setText(DateUtils.formatDateTime(mContext,message.getCreatedAt(),0));
+            //timeText.setText(DateUtils.formatDateTime(mContext,message.getCreatedAt(),0));
+            timeText.setText(new SimpleDateFormat("hh:mm a").format(new Date(message.getCreatedAt())));
             nameText.setText(message.getSender().getName());
             Log.v("SETTING_MSG","RECEIVED NEW MSG");
             // Insert the profile image from the URL into the ImageView.

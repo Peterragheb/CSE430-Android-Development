@@ -3,6 +3,7 @@ package com.games.peter.project_live_football_tactics.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class tab_home_lineup_fragment extends Fragment implements tab_Lineup_fra
     private void initUIComponents(Bundle bundle,View view){
         if(bundle!=null && !bundle.isEmpty()){
             ArrayList<Lineup> lineups =bundle.getParcelableArrayList("lineups");
-            if(lineups!=null &&!lineups.isEmpty())
+            if(lineups!=null &&!lineups.isEmpty() && lineups.get(1).getPlayersSize()!=0)
                 setup_formation(lineups,view);
         }
     }
@@ -165,6 +166,42 @@ public class tab_home_lineup_fragment extends Fragment implements tab_Lineup_fra
                 llout__col_1.add(viewStub);
             }
 
+        }
+        if (llout__col_2.isEmpty()){
+            Log.v("REMOVE","2");
+            inflated.findViewById(R.id.llout_col_2).setVisibility(View.GONE);
+        }
+        if (llout__col_3.isEmpty()){
+            Log.v("REMOVE","3");
+            inflated.findViewById(R.id.llout_col_3).setVisibility(View.GONE);
+        }
+        if (llout__col_4.isEmpty()){
+            Log.v("REMOVE","4");
+            inflated.findViewById(R.id.llout_col_4).setVisibility(View.GONE);
+        }
+        if (llout__col_5.isEmpty()){
+            Log.v("REMOVE","5");
+            inflated.findViewById(R.id.llout_col_5).setVisibility(View.GONE);
+        }
+        if (llout__col_6.isEmpty()){
+            Log.v("REMOVE","6");
+            inflated.findViewById(R.id.llout_col_6).setVisibility(View.GONE);
+        }
+        if (llout__col_7.isEmpty()){
+            Log.v("REMOVE","7");
+            inflated.findViewById(R.id.llout_col_7).setVisibility(View.GONE);
+        }
+        if (llout__col_8.isEmpty()){
+            Log.v("REMOVE","8");
+            inflated.findViewById(R.id.llout_col_8).setVisibility(View.GONE);
+        }
+        if (llout__col_9.isEmpty()){
+            Log.v("REMOVE","9");
+            inflated.findViewById(R.id.llout_col_9).setVisibility(View.GONE);
+        }
+        if (llout__col_1.isEmpty()){
+            Log.v("REMOVE","1");
+            inflated.findViewById(R.id.llout_col_1).setVisibility(View.GONE);
         }
 
     }

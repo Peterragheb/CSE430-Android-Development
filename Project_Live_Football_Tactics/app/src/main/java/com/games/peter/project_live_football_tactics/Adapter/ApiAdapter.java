@@ -457,6 +457,12 @@ public class ApiAdapter {
                             if (player.has(is_startingXI))
                             {
                                 if (player.getBoolean(is_startingXI)){
+                                    if (away_team_id ==-1){
+                                        away_team_id =player.getInt(team_season_id);
+                                    }
+                                    else if (player.getInt(team_season_id)!=away_team_id && away_team_id !=-1 && home_team_id ==-1){
+                                        home_team_id =player.getInt(team_season_id);
+                                    }
                                     if (player.getInt(team_season_id)==away_team_id){
                                         Log.v("SECOND_ROUND_AWAY","true");
                                         away_team.addPlayer(new Player(player.getInt(row),player.getInt(col),player.getString(player_name),player.getInt(shirtnumber),player.getInt(team_season_id)));
