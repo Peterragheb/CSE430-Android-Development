@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "91451732946",
+    "firebase_url": "https://projectlivefootballtactics.firebaseio.com",
+    "project_id": "projectlivefootballtactics",
+    "storage_bucket": "projectlivefootballtactics.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91451732946:android:1dbe28aca36e28fa",
+        "android_client_info": {
+          "package_name": "com.games.peter.project_live_football_tactics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91451732946-hh31qd2iqeaocacu0pbrblugcii8h79m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.games.peter.project_live_football_tactics",
+            "certificate_hash": "30576eb3c88fe9631e014c61fd0a9e6307883db6"
+          }
+        },
+        {
+          "client_id": "91451732946-bp28gg7k0o8851cgtlu8mb5eab5dlsl4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh9NfFYiiZ1fWT366RRAxb99bCRw_TExE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91451732946-bp28gg7k0o8851cgtlu8mb5eab5dlsl4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
