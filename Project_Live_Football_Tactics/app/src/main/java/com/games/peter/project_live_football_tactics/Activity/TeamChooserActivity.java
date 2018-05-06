@@ -81,7 +81,6 @@ public class TeamChooserActivity extends AppCompatActivity implements View.OnCli
         } else if (v.getId() == R.id.btn_teamchooser_finish) {
             if (selected_team!=null){
                 updateUser();
-                finish();
             }
         }
     }
@@ -160,6 +159,7 @@ public class TeamChooserActivity extends AppCompatActivity implements View.OnCli
                                 postValues.put(StaticStringsMethods.FAVORITE_TEAM_ID, selected_team_id);
                                 mDatabase.getReference().child("users").child(firebaseUser.getUid()).updateChildren(postValues);
                                 MainActivity.full_data=true; //to tell the main activity that the user data is complete in the database
+                                finish();
                             }
                             @Override
                             public void onCancelled(DatabaseError databaseError) {}

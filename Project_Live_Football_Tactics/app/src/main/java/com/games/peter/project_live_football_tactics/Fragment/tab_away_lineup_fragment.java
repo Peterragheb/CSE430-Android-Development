@@ -74,7 +74,12 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
                 View inflated1 = viewStub.inflate();
                 inflated1.findViewById(R.id.iv_player_image).setBackgroundResource(R.drawable.circle2);
                 ((TextView)inflated1.findViewById(R.id.tv_player_number)).setText(players.get(i).getShirtNumber()+"");
-                ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
+                String player_name =formatPlayerName(players.get(i).getName());
+                if (player_name!=""){
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(player_name);
+                }
+                else
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
                 llout__col_2.add(viewStub);
             }
             else if (col==3){
@@ -85,7 +90,12 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
                 View inflated1 = viewStub.inflate();
                 inflated1.findViewById(R.id.iv_player_image).setBackgroundResource(R.drawable.circle2);
                 ((TextView)inflated1.findViewById(R.id.tv_player_number)).setText(players.get(i).getShirtNumber()+"");
-                ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
+                String player_name =formatPlayerName(players.get(i).getName());
+                if (player_name!=""){
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(player_name);
+                }
+                else
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
                 llout__col_3.add(viewStub);
             }
             else if (col==4){
@@ -96,7 +106,12 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
                 View inflated1 = viewStub.inflate();
                 inflated1.findViewById(R.id.iv_player_image).setBackgroundResource(R.drawable.circle2);
                 ((TextView)inflated1.findViewById(R.id.tv_player_number)).setText(players.get(i).getShirtNumber()+"");
-                ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
+                String player_name =formatPlayerName(players.get(i).getName());
+                if (player_name!=""){
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(player_name);
+                }
+                else
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
                 llout__col_4.add(viewStub);
             }
             else if (col==5){
@@ -107,7 +122,12 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
                 View inflated1 = viewStub.inflate();
                 inflated1.findViewById(R.id.iv_player_image).setBackgroundResource(R.drawable.circle2);
                 ((TextView)inflated1.findViewById(R.id.tv_player_number)).setText(players.get(i).getShirtNumber()+"");
-                ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
+                String player_name =formatPlayerName(players.get(i).getName());
+                if (player_name!=""){
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(player_name);
+                }
+                else
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
                 llout__col_5.add(viewStub);
             }
             else if (col==6){
@@ -118,7 +138,12 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
                 View inflated1 = viewStub.inflate();
                 inflated1.findViewById(R.id.iv_player_image).setBackgroundResource(R.drawable.circle2);
                 ((TextView)inflated1.findViewById(R.id.tv_player_number)).setText(players.get(i).getShirtNumber()+"");
-                ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
+                String player_name =formatPlayerName(players.get(i).getName());
+                if (player_name!=""){
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(player_name);
+                }
+                else
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
                 llout__col_6.add(viewStub);
             }
             else if (col==7){
@@ -129,7 +154,12 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
                 View inflated1 = viewStub.inflate();
                 inflated1.findViewById(R.id.iv_player_image).setBackgroundResource(R.drawable.circle2);
                 ((TextView)inflated1.findViewById(R.id.tv_player_number)).setText(players.get(i).getShirtNumber()+"");
-                ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
+                String player_name =formatPlayerName(players.get(i).getName());
+                if (player_name!=""){
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(player_name);
+                }
+                else
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
                 llout__col_7.add(viewStub);
             }
             else if (col==8){
@@ -140,7 +170,12 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
                 View inflated1 = viewStub.inflate();
                 inflated1.findViewById(R.id.iv_player_image).setBackgroundResource(R.drawable.circle2);
                 ((TextView)inflated1.findViewById(R.id.tv_player_number)).setText(players.get(i).getShirtNumber()+"");
-                ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
+                String player_name =formatPlayerName(players.get(i).getName());
+                if (player_name!=""){
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(player_name);
+                }
+                else
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
                 llout__col_8.add(viewStub);
             }
             else if (col==9){
@@ -151,7 +186,12 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
                 View inflated1 = viewStub.inflate();
                 inflated1.findViewById(R.id.iv_player_image).setBackgroundResource(R.drawable.circle2);
                 ((TextView)inflated1.findViewById(R.id.tv_player_number)).setText(players.get(i).getShirtNumber()+"");
-                ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
+                String player_name =formatPlayerName(players.get(i).getName());
+                if (player_name!=""){
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(player_name);
+                }
+                else
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
                 llout__col_9.add(viewStub);
             }
             else if (col==1){
@@ -162,7 +202,12 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
                 View inflated1 = viewStub.inflate();
                 inflated1.findViewById(R.id.iv_player_image).setBackgroundResource(R.drawable.circle2);
                 ((TextView)inflated1.findViewById(R.id.tv_player_number)).setText(players.get(i).getShirtNumber()+"");
-                ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
+                String player_name =formatPlayerName(players.get(i).getName());
+                if (player_name!=""){
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(player_name);
+                }
+                else
+                    ((TextView)inflated1.findViewById(R.id.tv_player_name)).setText(players.get(i).getName());
                 llout__col_1.add(viewStub);
             }
 
@@ -217,4 +262,18 @@ public class tab_away_lineup_fragment extends Fragment implements tab_Lineup_fra
         ((MatchActivity)getActivity()).mtab_Lineup_fragment.removeListener(this);
     }
     //======================================================
+    private String formatPlayerName(String name){
+        if (!name.isEmpty()){
+            String formatted_name="";
+            String [] fullname= name.split(" ");
+            //for (int i=0;i<fullname.length-1;i++){
+            if (fullname.length>1)
+                formatted_name+=Character.toUpperCase(fullname[0].charAt(0))+".\n";
+            //}
+            formatted_name+=fullname[fullname.length-1];
+            return formatted_name;
+        }
+       else
+           return "";
+    }
 }

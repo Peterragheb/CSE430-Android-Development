@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //===============================================================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUIComponents();
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //======================================================
     private void initUIComponents(){
         //Intent intent = getIntent();
+
         tv_main_login = findViewById(R.id.tv_main_login);
         iv_main_settings = findViewById(R.id.iv_main_settings);
         ll_league_matches1=findViewById(R.id.cv_league1_matches_list).findViewById(R.id.ll_league_matches);
@@ -408,6 +410,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         else
                         {
+                            Log.v("dataSnapshot_IS","null");
                             startActivity(new Intent(MainActivity.this,TeamChooserActivity.class));
                             return;
                         }
@@ -420,6 +423,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
             }
             else {
+                Log.v("NO_FAV_TEAM","YES");
                 startActivity(new Intent(MainActivity.this,TeamChooserActivity.class));
             }
         }
