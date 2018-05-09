@@ -11,11 +11,14 @@
         android:layout_height="match_parent"
         android:layout_weight="0.5"
         android:orientation="vertical">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/image_message_profile"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/circle"
+            android:src="@drawable/ic_profile_picture"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/grass_green"
             android:layout_marginLeft="8dp"/>
         <View
             android:layout_width="match_parent"
@@ -48,7 +51,7 @@
         android:maxWidth="240dp"
         android:padding="10dp"
         android:textColor="@android:color/white"
-        android:elevation="5dp"
+        android:elevation="4dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
         android:textSize="12dp"

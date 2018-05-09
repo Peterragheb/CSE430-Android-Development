@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.games.peter.project_live_football_tactics.Adapter.MessageListAdapter;
@@ -26,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,6 +49,7 @@ public class tab_chat_fragment extends Fragment implements View.OnClickListener 
     private String user_id;
     private String user_name;
     private String fixture_id;
+    private String user_photo_url;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     Animation anim_scale_up,anim_scale_down;
@@ -94,35 +98,39 @@ public class tab_chat_fragment extends Fragment implements View.OnClickListener 
             team_id = getActivity().getIntent().getIntExtra("team_id",0);
             user_id = getActivity().getIntent().getStringExtra("user_id");
             user_name = getActivity().getIntent().getStringExtra("user_name");
+            user_photo_url = getActivity().getIntent().getStringExtra("user_photo_url");
             if (team_id != 0) {
-                chatRoom =mDatabase.getReference().child("chats").child(fixture_id).child(team_id+"");
-                chatRoom.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        updateChatConversation(dataSnapshot);
-                    }
+                if (mDatabase!=null){
+                    chatRoom =mDatabase.getReference().child("chats").child(fixture_id).child(team_id+"");
+                    chatRoom.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            updateChatConversation(dataSnapshot);
+                        }
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                        updateChatConversation(dataSnapshot);
-                    }
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                            updateChatConversation(dataSnapshot);
+                        }
 
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
-
+                        }
+                    });
+                }
+                else
+                    showErrorDialog("Couldn't update chat. Please check your internet connection.");
             }
 
         }
@@ -167,38 +175,58 @@ public class tab_chat_fragment extends Fragment implements View.OnClickListener 
     };
     //======================================================
     private void updateChatConversation(DataSnapshot dataSnapshot){
-        String message, user_id , user_name;
+        String message, user_id , user_name , profile_picture_url;
         long send_date=0;
-        User thisuser = new User("1",this.user_name,"no_prof_pic");
+        User thisuser = new User("1",this.user_name,user_photo_url);
         Iterator i = dataSnapshot.getChildren().iterator();
         while (i.hasNext()){
             message = (String)((DataSnapshot)i.next()).getValue();
             send_date = (long)((DataSnapshot)i.next()).getValue();
             user_id = (String)((DataSnapshot)i.next()).getValue();
             user_name = (String)((DataSnapshot)i.next()).getValue();
+            profile_picture_url = (String)((DataSnapshot)i.next()).getValue();
             Log.v("Message","message :"+message+" userid:"+user_id+" username :"+user_name+ " senddate "+send_date);
 
             if (user_id.equals(this.user_id))
                 messages.add(new Message(thisuser, Long.valueOf(send_date),message));
             else {
-                messages.add(new Message(new User("2",user_name,"no_prof_pic"), Long.valueOf(send_date),message));
+                messages.add(new Message(new User("2",user_name,profile_picture_url), Long.valueOf(send_date),message));
             }
             mMessageAdapter.notifyDataSetChanged();
         }
     }
     //======================================================
     private void sendMessage(String msg){
-        String user_message_key;
-        Map<String ,Object > map = new HashMap<String ,Object >();
-        user_message_key = chatRoom.push().getKey();
-        chatRoom.updateChildren(map);
-        DatabaseReference message =chatRoom.child(user_message_key);
-        Map<String ,Object> message_fields = new HashMap<String ,Object >();
-        message_fields.put("message",msg);
-        message_fields.put("user_id",user_id);
-        message_fields.put("user_name",user_name);
-        message_fields.put("send_date", Calendar.getInstance().getTimeInMillis());
-        message.updateChildren(message_fields);
+        if (chatRoom!=null){
+            String user_message_key;
+            Map<String ,Object > map = new HashMap<String ,Object >();
+            user_message_key = chatRoom.push().getKey();
+            chatRoom.updateChildren(map);
+            DatabaseReference message =chatRoom.child(user_message_key);
+            Map<String ,Object> message_fields = new HashMap<String ,Object >();
+            message_fields.put("message",msg);
+            message_fields.put("user_id",user_id);
+            message_fields.put("user_name",user_name);
+            message_fields.put("send_date", Calendar.getInstance().getTimeInMillis());
+            message_fields.put("user_profile_picture_id", user_photo_url);
+            message.updateChildren(message_fields);
+        }
+        else
+            showErrorDialog(null);
     }
     //======================================================
+    private void showErrorDialog(String message){
+        if (message==null){
+            message = "Message was not sent check your internet connection.";
+        }
+        LinearLayout.LayoutParams params = (new LinearLayout.LayoutParams(90, 90));
+        params.gravity = Gravity.CENTER;
+        new LovelyInfoDialog(this.getContext())
+                .setTopColorRes(R.color.Grey_blue)
+                .setIcon(R.drawable.ic_info_white)
+                .configureView(rootView -> rootView.findViewById(R.id.ld_icon).setLayoutParams(params))
+                .setTitle("Error")
+                .setMessage(message)
+                .show();
+    }
 }

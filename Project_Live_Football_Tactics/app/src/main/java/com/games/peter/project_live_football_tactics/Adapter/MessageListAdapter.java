@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.games.peter.project_live_football_tactics.Class.Message;
 import com.games.peter.project_live_football_tactics.Listener.OnItemClickListener;
 import com.games.peter.project_live_football_tactics.R;
@@ -132,6 +133,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             //timeText.setText(DateUtils.formatDateTime(mContext,message.getCreatedAt(),0));
             timeText.setText(new SimpleDateFormat("hh:mm a").format(new Date(message.getCreatedAt())));
             nameText.setText(message.getSender().getName());
+            Glide.with(MessageListAdapter.this.mContext).load(message.getSender().getProfilePictureUrl()).into(profileImage);
             Log.v("SETTING_MSG","RECEIVED NEW MSG");
             // Insert the profile image from the URL into the ImageView.
             //Utils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);

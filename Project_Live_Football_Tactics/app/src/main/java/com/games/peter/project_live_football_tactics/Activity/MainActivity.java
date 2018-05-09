@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static int team_id;
     static String user_id;
     static String user_name;
+    static String user_profile_pic_url;
     static boolean full_data=false;
     //===============================================================================================================
     @Override
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tv_main_login.setVisibility(View.GONE);
             user_id = user.getUid();
             user_name = user.getDisplayName();
+            user_profile_pic_url = user.getPhotoUrl().toString();
             //make sure that the user info is in the database
             FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
             DatabaseReference userdata = mDatabase.getReference().child("users").child(user.getUid());
@@ -187,15 +189,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 match =getMatchId(match_List_id.get(0),match_List_id.get(1)); //get match from list using list number and match index
                 //if (team_id!=0 && match!=null){//make sure we know the user's favorite team before starting match activity
                     if (match!=null){//make sure we know the user's favorite team before starting match activity
-                    intent.putExtra("away_team_id",Integer.valueOf(match.getId_team_season_away())); //send match away team id
-                    intent.putExtra("home_team_id",Integer.valueOf(match.getId_team_season_home()));//send match home team id
-                    intent.putExtra("away_team_name",match.getTeam_season_away_name()); //send match away team name
-                    intent.putExtra("home_team_name",match.getTeam_season_home_name());//send match home team name
-                    intent.putExtra("fixture_id",fixture_id); //send fixture id
-                    intent.putExtra("user_id",user_id); //send user id  from firebase
-                    intent.putExtra("user_name",user_name); //send username from firebase
-                    intent.putExtra("team_id",team_id); // send favorite team id from firebase
-                    startActivity(intent);
+                        intent.putExtra("away_team_id",Integer.valueOf(match.getId_team_season_away())); //send match away team id
+                        intent.putExtra("home_team_id",Integer.valueOf(match.getId_team_season_home()));//send match home team id
+                        intent.putExtra("away_team_name",match.getTeam_season_away_name()); //send match away team name
+                        intent.putExtra("home_team_name",match.getTeam_season_home_name());//send match home team name
+                        intent.putExtra("fixture_id",fixture_id); //send fixture id
+                        intent.putExtra("user_id",user_id); //send user id  from firebase
+                        intent.putExtra("user_name",user_name); //send username from firebase
+                        intent.putExtra("team_id",team_id); // send favorite team id from firebase
+                        intent.putExtra("user_photo_url",user_profile_pic_url); //send photourl from firebase
+                        startActivity(intent);
                 }
 
             }
