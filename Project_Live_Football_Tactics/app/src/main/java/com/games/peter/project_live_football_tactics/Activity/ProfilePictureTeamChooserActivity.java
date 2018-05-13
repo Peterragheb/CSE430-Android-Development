@@ -1,13 +1,20 @@
 package com.games.peter.project_live_football_tactics.Activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -95,12 +102,14 @@ public class ProfilePictureTeamChooserActivity extends AppCompatActivity impleme
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        uriProfileImage = resourceToUri(this.getBaseContext(),R.drawable.ic_profile_picture);
     }
     //======================================================
     @Override
     public void onClick(View v) {
         if (v == civ_profilepictureteamchooser_profile_picture){
-            ShowImageChooser();
+            if (isStoragePermissionGranted())
+                ShowImageChooser();
         }
         else  if (v == tv_profilepictureteamchooser_league_name){
             ArrayList<DialogChoiceItem> league_list = new ArrayList<>();
@@ -345,6 +354,43 @@ public class ProfilePictureTeamChooserActivity extends AppCompatActivity impleme
                 .setTitle("Error")
                 .setMessage(message)
                 .show();
+    }
+    //======================================================
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if ((checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED)&&(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                Log.v("isPermissionGranted","Permission is granted");
+                return true;
+            } else {
+
+                Log.v("isPermissionGranted","Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("isPermissionGranted","Permission is granted");
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED && grantResults[1]== PackageManager.PERMISSION_GRANTED){
+            Log.v("onRequestPermissions","Permission: "+permissions[0]+ " was "+grantResults[0]+" Permission: "+permissions[1]+ "was "+grantResults[1]);
+            //resume tasks needing this permission
+            ShowImageChooser();
+        }
+    }
+    //======================================================
+    public static Uri resourceToUri(Context context, int resID) {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                context.getResources().getResourcePackageName(resID) + '/' +
+                context.getResources().getResourceTypeName(resID) + '/' +
+                context.getResources().getResourceEntryName(resID) );
     }
     //======================================================
 }

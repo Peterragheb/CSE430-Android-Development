@@ -54,7 +54,7 @@
         android:elevation="4dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
-        android:textSize="12dp"
+        android:textSize="14sp"
         android:layout_marginLeft="8dp" />
 
     <TextView

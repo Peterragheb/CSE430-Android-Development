@@ -17,11 +17,14 @@ import android.widget.Toast;
 import com.games.peter.project_live_football_tactics.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.yarolegovich.lovelydialog.LovelyInfoDialog;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     //===============================================================================================================
@@ -105,28 +108,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                         //===========================================================
                         else {
-                            if (task.getException().getClass().equals(FirebaseAuthException.class)){
-                                FirebaseAuthException e = (FirebaseAuthException) task.getException();
+                            try {
+                                throw Objects.requireNonNull(task.getException());
+                            }catch (FirebaseNetworkException e){
+                                Log.v("LOGIN_ERROR","NETWORK");
                                 progressDialog.cancel();
-                                //===========================================================
-                                if (!error_handler(e)) {
-                                    Toast.makeText(LoginActivity.this, ERROR_LOGIN, Toast.LENGTH_SHORT).show();//in case error was not catched a default error handler is inserted
-                                    Log.e("Login", "Failed Log-in", e);//unhandled error logged
+                                showErrorDialog("Please check your internet connection.\nif you are connected to the internet and this message keeps appearing contact the app developer");
+                            }catch (FirebaseException e){
+                                progressDialog.cancel();
+                                try {
+                                    Log.v("LOGIN_ERROR","AUTH");
+                                    if (!error_handler((FirebaseAuthException) e)) {
+                                        Toast.makeText(LoginActivity.this, ERROR_LOGIN, Toast.LENGTH_SHORT).show();//in case error was not catched a default error handler is inserted
+                                        Log.e("Login", "Failed Log-in", e);//unhandled error logged
+                                    }
                                 }
-                                //===========================================================
+                                catch (ClassCastException ex){
+                                    Log.v("Error",ex.getMessage());
+                                }
                             }
-                            else if (task.getException().getClass().equals(FirebaseNetworkException.class)) {
+                            catch (Exception e) {
+                                Log.v("SIGNUP_ERROR","ELSE");
                                 progressDialog.cancel();
-                                showErrorDialog();
+                                Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
                             }
-                            else
-                                showErrorDialog();
                         }
                     }
                 });
             }
             else
-                showErrorDialog();
+                showErrorDialog(null);
         }
     }
     //======================================================
@@ -223,7 +235,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return entered;
     }
     //======================================================
-    private void showErrorDialog(){
+    private void showErrorDialog(String message){
+        if (message==null){
+            message = "Please check your internet connection.\nif you are connected to the internet and this message keeps appearing contact the app developer";
+        }
         LinearLayout.LayoutParams params = (new LinearLayout.LayoutParams(90, 90));
         params.gravity = Gravity.CENTER;
         new LovelyInfoDialog(this)
@@ -231,7 +246,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .setIcon(R.drawable.ic_info_white)
                 .configureView(rootView -> rootView.findViewById(R.id.ld_icon).setLayoutParams(params))
                 .setTitle("Error")
-                .setMessage("Please check your internet connection.\nif you are connected to the internet and this message keeps appearing contact the app developer")
+                .setMessage(message)
                 .show();
     }
     //======================================================

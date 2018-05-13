@@ -36,6 +36,7 @@ public final class StaticStringsMethods {
     public final static String LEAGUE_SPAIN = "129";
     public final static String IS_LAST_SEASON = "is_last_season";
     public final static String NOT_STARTED = "NS";
+    public final static String STARTED = "ST";
     public final static String FINISHED = "FIN";
     public final static String HALF_TIME = "HT";
     public final static String NO_LINEUP = "no_lineup";

@@ -41,7 +41,7 @@ public class CustomMatchView extends LinearLayout implements Match.ChangeListene
         //======================================================
         else if (field.equals("id_season")){ }
         //======================================================
-        else if (field.equals("setFixture_status_short")){
+        else if (field.equals("fixture_status_short")){ // changed         else if (field.equals("setFixture_status_short")){ to this
             if ((value.equals(StaticStringsMethods.HALF_TIME))||
                     (value.equals(StaticStringsMethods.FINISHED))){
                 ImageView iv_minute = findViewById(R.id.iv_match_time_circle);
@@ -50,11 +50,18 @@ public class CustomMatchView extends LinearLayout implements Match.ChangeListene
                 iv_minute.setVisibility(View.INVISIBLE);
                 tv_time.setTextColor(Color.BLACK);
             }
+            //ADDED 10/5 TEST TODO
+            else if (value.equals(StaticStringsMethods.STARTED)){
+                TextView tv = findViewById(R.id.tv_match_home_score);
+                tv.setText(value);
+                TextView tv2 = findViewById(R.id.tv_match_home_score);
+                tv2.setText(value);
+            }
         }
         //======================================================
-        else if (field.equals("setId_team_season_away")){ }
+        else if (field.equals("id_team_season_away")){ }
         //======================================================
-        else if (field.equals("setId_team_season_home")){ }
+        else if (field.equals("id_team_season_home")){ }
         //======================================================
         else if (field.equals("number_goal_team_away")){
             TextView tv = findViewById(R.id.tv_match_away_score);

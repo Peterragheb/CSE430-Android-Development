@@ -1,12 +1,18 @@
 package com.games.peter.project_live_football_tactics.Activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -91,6 +97,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        uriProfileImage = resourceToUri(this.getBaseContext(),R.drawable.ic_profile_picture);
     }
     //======================================================
     @Override
@@ -101,7 +108,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             perform_Signup();
         }
         else if (v.getId()==R.id.civ_signup_profile_picture){
-            ShowImageChooser();
+            if (isStoragePermissionGranted())
+                ShowImageChooser();
 
         }
     }
@@ -150,49 +158,54 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }
         //===========================================================
         else{
-            progressDialog.setMessage(SIGNUP_USER);
-            progressDialog.show();
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {//account creation
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {//if account created successfully
+            if (mAuth !=null){
+                progressDialog.setMessage(SIGNUP_USER);
+                progressDialog.show();
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {//account creation
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {//if account created successfully
 
-                        //Add user to firebase
-                        AddUserDataToFirebase(username);
+                            //Add user to firebase
+                            AddUserDataToFirebase(username);
 
-                    }
-                    //===========================================================
-                    else {
-                        try {
-                            throw Objects.requireNonNull(task.getException());
-                        }catch (FirebaseNetworkException e){
-                            Log.v("SIGNUP_ERROR","NETWORK");
-                            progressDialog.cancel();
-                            showErrorDialog("Please check your internet connection.\nif you are connected to the internet and this message keeps appearing contact the app developer");
-                        }catch (FirebaseException e){
-                            progressDialog.cancel();
+                        }
+                        //===========================================================
+                        else {
                             try {
-                                Log.v("SIGNUP_ERROR","AUTH");
-                                if (!error_handler((FirebaseAuthException) e)) {
-                                    Toast.makeText(SignupActivity.this, ERROR_SIGNUP, Toast.LENGTH_SHORT).show();//in case error was not catched a default error handler is inserted
-                                    Log.e("Login", "Failed Log-in", e);//unhandled error logged
+                                throw Objects.requireNonNull(task.getException());
+                            }catch (FirebaseNetworkException e){
+                                Log.v("SIGNUP_ERROR","NETWORK");
+                                progressDialog.cancel();
+                                showErrorDialog("Please check your internet connection.\nif you are connected to the internet and this message keeps appearing contact the app developer");
+                            }catch (FirebaseException e){
+                                progressDialog.cancel();
+                                try {
+                                    Log.v("SIGNUP_ERROR","AUTH");
+                                    if (!error_handler((FirebaseAuthException) e)) {
+                                        Toast.makeText(SignupActivity.this, ERROR_SIGNUP, Toast.LENGTH_SHORT).show();//in case error was not catched a default error handler is inserted
+                                        Log.e("Signup", "Failed Signup", e);//unhandled error logged
+                                    }
+                                }
+                                catch (ClassCastException ex){
+                                    Log.v("Error",ex.getMessage());
                                 }
                             }
-                            catch (ClassCastException ex){
-                                Log.v("Error",ex.getMessage());
+                            catch (Exception e) {
+                                Log.v("SIGNUP_ERROR","ELSE");
+                                progressDialog.cancel();
+                                Toast.makeText(SignupActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
                             }
                         }
-                        catch (Exception e) {
-                            Log.v("SIGNUP_ERROR","ELSE");
-                            progressDialog.cancel();
-                            Toast.makeText(SignupActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
+                        //===========================================================
                     }
-                    //===========================================================
-                }
-            });
-        }
+                });
+            }
+            else
+                showErrorDialog(null);
+            }
+
     }
     //======================================================
     private Boolean error_handler(FirebaseAuthException e) {//Handles all Firebase Authentication errors
@@ -384,6 +397,43 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 .setTitle("Error")
                 .setMessage(message)
                 .show();
+    }
+    //======================================================
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if ((checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED)&&(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                Log.v("isPermissionGranted","Permission is granted");
+                return true;
+            } else {
+
+                Log.v("isPermissionGranted","Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("isPermissionGranted","Permission is granted");
+            return true;
+        }
+    }
+    //======================================================
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED && grantResults[1]== PackageManager.PERMISSION_GRANTED){
+            Log.v("onRequestPermissions","Permission: "+permissions[0]+ " was "+grantResults[0]+" Permission: "+permissions[1]+ "was "+grantResults[1]);
+            //resume tasks needing this permission
+            ShowImageChooser();
+        }
+    }
+    //======================================================
+    public static Uri resourceToUri(Context context, int resID) {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                context.getResources().getResourcePackageName(resID) + '/' +
+                context.getResources().getResourceTypeName(resID) + '/' +
+                context.getResources().getResourceEntryName(resID) );
     }
     //======================================================
 }
