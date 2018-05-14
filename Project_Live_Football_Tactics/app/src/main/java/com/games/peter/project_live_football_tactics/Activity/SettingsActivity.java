@@ -185,7 +185,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 .setIcon(R.drawable.ic_info_white)
                 .configureView(rootView -> rootView.findViewById(R.id.ld_icon).setLayoutParams(params))
                 .setTitle("About")
-                .setMessage("Live scores and push notifications, for the top leagues around the world.\nAs well as being a live score app, Foottalks is changing the face of football by liberating and sharing the collective opinion of fans from all over the world using real-time chats.\n\nThis is an ALPHA version if you encountered any bug or crash please don't hesitate to contact the application developer.\n\nNOTE:This Application is for football addicts only.")
+                .setMessage("Live scores and push notifications, for the top leagues around the world.\nAs well as being a live score app, Foottalks is changing the face of football by liberating and sharing the collective opinion of fans from all over the world using real-time chats.\n\nThis is an ALPHA version if you encountered any bug or crash please don't hesitate to contact us.\n\nNOTE:This Application is for football addicts only.\n\nContact us:pete.ragheb@gmail.com")
                 .show();
     }
     //======================================================
