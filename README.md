@@ -1,4 +1,19 @@
 # CSE430-Android-Development
+
+## Summary ##
+1] Lab 1 "Currency Converter" Added 20/2/2018 
+
+2] Lab 2 "Matching Game" Added 27/2/2018 
+
+3] Lab 3 "Matching Game Database" Added 06/3/2018 
+
+4] Lab 4 "Voice Calendar" Added 13/3/2018 
+
+5] Lab 5 "Pedometer" Added 27/3/2018 
+
+6] Lab 6 "Money Collector Game" Added 03/4/2018 
+
+
 # Screenshots
 <p align="middle">
 <img src="https://user-images.githubusercontent.com/22989662/40127591-01d752d4-5930-11e8-97a4-1cb96cdbec08.png" width="167" height="297" hspace="20">
@@ -56,19 +71,9 @@ A simple matching game that allows the player to click on a card to see the pict
 ## Project: Foottalks ## 
   It provides football matches live scores and lineups, for the top leagues around the world. Foottalks provide real-time chat between the supporters of each club to share their opinions and discuss match tactics during the day of the match.
 <p align="middle">
-<img src="https://user-images.githubusercontent.com/22989662/40127689-3e3284ba-5930-11e8-9615-d183a759c592.png" width="200" height="356" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40135541-e7a4b24c-5945-11e8-90e9-d37791fee971.png" width="167" height="297" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40135551-ee4fd202-5945-11e8-80ec-8a48a71efa9c.png" width="167" height="297" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40135549-eaff6860-5945-11e8-9999-b9e0d59084a5.png" width="167" height="297" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40127689-3e3284ba-5930-11e8-9615-d183a759c592.png" width="167" height="297" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40135840-9b6f27bc-5946-11e8-933d-d02365556e33.png" width="167" height="297" hspace="20">
 </p>
-
-## Summary ##
-
-1] Lab 1 "Currency Converter" Added 20/2/2018 
-
-2] Lab 2 "Matching Game" Added 27/2/2018 
-
-3] Lab 3 "Matching Game Database" Added 06/3/2018 
-
-4] Lab 4 "Voice Calendar" Added 13/3/2018 
-
-5] Lab 5 "Pedometer" Added 27/3/2018 
-
-6] Lab 6 "Money Collector Game" Added 03/4/2018 
