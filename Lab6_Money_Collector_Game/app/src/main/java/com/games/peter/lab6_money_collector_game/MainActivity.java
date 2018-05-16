@@ -9,6 +9,7 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,6 +23,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -234,21 +236,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                .clickable(true)
 //                .add(
 //                        new LatLng(30.063686, 31.278328),
-//                        new LatLng(30.063728, 31.278328),
+//                        new LatLng(30.063686, 31.278348),
 //                        new LatLng(30.063728, 31.278348),
-//                        new LatLng(30.063686, 31.278348)
+//                        new LatLng(30.063728, 31.278328)
 //                ));
-//        mMap.addMarker(new MarkerOptions().position(new LatLng(30.063707,31.278338)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_coin)));
         polygon1 = mMap.addPolygon(new PolygonOptions()
                 .clickable(true)
                 .add(
-
-                        new LatLng(30.097950, 31.332192),
-                        new LatLng(30.097950, 31.332081),
-                        new LatLng(30.098157, 31.332081),
-                        new LatLng(30.098157, 31.332192)
-
+                        new LatLng(30.063879, 31.278259),
+                        new LatLng(30.063879, 31.278413),
+                        new LatLng(30.063652, 31.278413),
+                        new LatLng(30.063652, 31.278259)
                 ));
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(30.063707,31.278338)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_coin)));
+//        polygon1 = mMap.addPolygon(new PolygonOptions()
+//                .clickable(true)
+//                .add(
+//
+//                        new LatLng(30.097950, 31.332192),
+//                        new LatLng(30.097950, 31.332081),
+//                        new LatLng(30.098157, 31.332081),
+//                        new LatLng(30.098157, 31.332192)
+//
+//                ));
         //mMap.addMarker(new MarkerOptions().position(new LatLng(30.098000,31.332080)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_coin)));
 
         // Store a data object with the polygon, used here to indicate an arbitrary type.
@@ -259,18 +269,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        polygon2 = mMap.addPolygon(new PolygonOptions()
 //                .clickable(true)
 //                .add(
-//                        new LatLng(30.063264, 31.278523),
 //                        new LatLng(30.063232, 31.278523),
 //                        new LatLng(30.063232, 31.278581),
-//                        new LatLng(30.063264, 31.278581)));
-////        mMap.addMarker(new MarkerOptions().position(new LatLng(30.063248,31.278552)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_coin)));
+//                        new LatLng(30.063264, 31.278581),
+//                        new LatLng(30.063264, 31.278523)
+//                        ));
         polygon2 = mMap.addPolygon(new PolygonOptions()
                 .clickable(true)
                 .add(
-                        new LatLng(30.097940, 31.332192),
-                        new LatLng(30.097940, 31.332081),
-                        new LatLng(30.097855, 31.332081),
-                        new LatLng(30.097855, 31.332192)));
+                        new LatLng(30.063240, 31.278496),
+                        new LatLng(30.063240, 31.278741),
+                        new LatLng(30.063121, 31.278741),
+                        new LatLng(30.063121, 31.278496)
+                ));
+////        mMap.addMarker(new MarkerOptions().position(new LatLng(30.063248,31.278552)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_coin)));
+//        polygon2 = mMap.addPolygon(new PolygonOptions()
+//                .clickable(true)
+//                .add(
+//                        new LatLng(30.097940, 31.332192),
+//                        new LatLng(30.097940, 31.332081),
+//                        new LatLng(30.097855, 31.332081),
+//                        new LatLng(30.097855, 31.332192)));
 //        mMap.addMarker(new MarkerOptions().position(new LatLng(30.097985,31.332100)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_coin)));
         polygon2.setTag("beta");
         stylePolygon(polygon2);
@@ -374,14 +393,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Acquire a reference to the system Location Manager
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-//        Criteria criteria = new Criteria();
-//        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-//        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
-//        criteria.setAltitudeRequired(false);
-//        criteria.setBearingRequired(true);
-//        criteria.setSpeedRequired(true);
-//        criteria.setCostAllowed(false);
-//        recommended = locationManager.getBestProvider(criteria, false);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(true);
+        criteria.setSpeedRequired(true);
+        criteria.setCostAllowed(false);
+        recommended = locationManager.getBestProvider(criteria, false);
 
         if (locationManager.isProviderEnabled(locationManager.GPS_PROVIDER))
             mLocationProviderEnabled=true;
@@ -416,7 +435,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mLocationProviderEnabled=false;
                 displayLocationSettingsRequest(MainActivity.this);
             }};
-        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 1000, 0, locationListener);
+        locationManager.requestLocationUpdates(recommended, 1000, 0, locationListener);
     }
     /**
      * Gets the current location of the device, and positions the map's camera.
@@ -525,7 +544,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void reset(){
         score=0;
         game_started=false;
-        genertateCoins();
         mLastVisitedPolygon=0;
         tv_remaining_coins.setText(polygon1Markers.size()+polygon2Markers.size()+"");
         //tv_remaining_coins.setText(polygon1Markers.size()+"");
@@ -713,18 +731,22 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onClick(View v) {
         if (v.getId()==R.id.btn_start_game){
-            Log.v("onclick","btn_start CLICKED !!!!!!!!!!!!!!!!!!!!!");
-            game_started=true;
-            //===========================================
-            //hide bottom Layout Slide Down
-            linl_bottom_layout.setTranslationY(0);
-            linl_bottom_layout.animate().setDuration(500).translationYBy(linl_bottom_layout.getHeight()).start();
-            //===========================================
-            fab_settings.setVisibility(View.VISIBLE);
-            return;
+            if (!FIRST_TIME){
+                Log.v("onclick","btn_start CLICKED !!!!!!!!!!!!!!!!!!!!!");
+                game_started=true;
+                //===========================================
+                //hide bottom Layout Slide Down
+                linl_bottom_layout.setTranslationY(0);
+                linl_bottom_layout.animate().setDuration(500).translationYBy(linl_bottom_layout.getHeight()).start();
+                //===========================================
+                fab_settings.setVisibility(View.VISIBLE);
+                return;
+            }
+
         }
         else if (v.getId()==R.id.btn_restart_game){
             reset();
+            genertateCoins();
             game_started=true;
             //hide bottom congrats Layout Slide Down
             linl_bottom_congrat_layout.setTranslationY(0);
@@ -757,21 +779,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             linl_middle_layout.animate().setDuration(500).translationXBy(linl_middle_layout.getWidth()).start();
         }
         else if (v.getId()==R.id.btn_submit_settings){
-//            if (!et_coin_number.getText().toString().isEmpty()){
-//                int num_of_coins=Integer.valueOf(et_coin_number.getText().toString());
-//                coins_num=num_of_coins;
-//                for (int i=0;i<polygon1Markers.size();i++){
-//                    polygon1Markers.get(i).remove();
-//                }
-//                for (int i=0;i<polygon2Markers.size();i++){
-//                    polygon2Markers.get(i).remove();
-//                }
-//                polygon1Markers.clear();
-//                polygon2Markers.clear();
-//                initStartupComponents();
-//                game_started=false;
-//                reset();
-//            }
+            if (!et_coin_number.getText().toString().isEmpty()){
+                int num_of_coins=Integer.valueOf(et_coin_number.getText().toString());
+                if (num_of_coins>0&&num_of_coins<5){
+                    coins_num=num_of_coins;
+                    Log.v("Coins",coins_num+"");
+                    // Check if no view has focus:
+                    View view = this.getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+
+                    mMap.clear();
+                    polygon1Markers.clear();
+                    polygon2Markers.clear();
+                    initStartupComponents();
+                    game_started=false;
+                    reset();
+                    //show bottom congrat Layout Slide Up
+                    linl_bottom_layout.setTranslationY(linl_bottom_layout.getHeight());
+                    linl_bottom_layout.animate().setDuration(500).translationYBy(-linl_bottom_layout.getHeight()).start();
+                    //===========================================
+                }
+            }
+            fab_settings.setVisibility(View.INVISIBLE);
             linl_middle_layout.setVisibility(View.VISIBLE);
             linl_middle_layout.setTranslationX(0);
             linl_middle_layout.animate().setDuration(500).translationXBy(-linl_middle_layout.getWidth()-90).start();
