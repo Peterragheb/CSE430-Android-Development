@@ -25,11 +25,13 @@
         android:id="@+id/text_message_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/chat_msg_user_background"
+        android:elevation="4dp"
         android:maxWidth="240dp"
         android:padding="10dp"
+        android:textSize="14sp"
         android:text="hello, hello!"
         android:textColor="#ffffff" />
 </LinearLayout>

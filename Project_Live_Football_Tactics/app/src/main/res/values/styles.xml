@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/bright_blue2</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="splashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="colorPrimary">@color/Grey_blue</item>
+        <item name="colorPrimaryDark">@color/Grey_blue</item>
+        <item name="colorAccent">@color/bright_blue2</item>
+    </style>
 </resources>

@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.games.peter.project_live_football_tactics.MatchActivity">
+    tools:context="com.games.peter.project_live_football_tactics.Activity.MatchActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
+        android:minHeight="?android:attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:titleTextColor="@android:color/white"
-        android:background="?attr/colorPrimary">
+        android:background="?android:attr/colorPrimary">
         <ImageView
             android:id="@+id/iv_go_to_lineup_tab"
             android:layout_width="26dp"

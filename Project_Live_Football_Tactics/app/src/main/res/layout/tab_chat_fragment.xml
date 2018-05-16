@@ -22,54 +22,51 @@
         android:orientation="horizontal"
         android:background="@android:color/transparent"
         android:minHeight="48dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent">
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.05"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            android:elevation="1dp"
             android:background="@drawable/bottom_text_box_background"
             android:layout_weight="1">
             <EditText
                 android:id="@+id/edittext_chatbox"
                 android:hint="Type a message"
+                android:textColorHint="@android:color/darker_gray"
                 android:background="@android:color/transparent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:maxLines="4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
                 android:maxLength="300"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:scrollbars="vertical"
                 android:isScrollContainer="true"
                 android:inputType="textShortMessage|textMultiLine"
                 android:imeOptions="actionSend|flagNoEnterAction"/>
         </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.05"/>
         <Button
             android:id="@+id/button_chatbox_send"
             android:textSize="14dp"
             android:background="@drawable/ic_send_button"
             android:clickable="true"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center" />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.05"/>
+
     </LinearLayout>
 
 </LinearLayout>

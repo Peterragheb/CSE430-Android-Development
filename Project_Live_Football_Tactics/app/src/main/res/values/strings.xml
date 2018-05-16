@@ -1,3 +1,39 @@
 <resources>
     <string name="app_name">Foottalks</string>
+    <string name="register">REGISTER</string>
+    <string name="e_mail">E-mail</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">Signup</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up</string>
+    <string name="about">About</string>
+    <string name="team">Team</string>
+    <string name="email">Email</string>
+    <string name="logout">Logout</string>
+    <string name="premier_league">Premier League</string>
+    <string name="la_liga">La Liga</string>
+    <string name="bundesliga">BundesLiga</string>
+    <string name="seria_a">Seria A</string>
+    <string name="ligue_1">Ligue 1</string>
+    <string name="refresh_token">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YWQ2MWI1OTM0OGFhNzA3MGQwNjg3MzYiLCJpYXQiOjE1MjQ1MjQxMTd9.YloIBVTLovSCP-OoHfgVEfgipCFra8_Yzo9nqmHd3K8</string>
+    <string name="access_token_request">https://api.sportdeer.com/v1/accessToken?refresh_token=</string>
+    <string name="accress_token_field">access_token=</string>
+    <string name="request_in_leagues">https://api.sportdeer.com/v1/leagues/</string>
+    <string name="request_in_seasons">https://api.sportdeer.com/v1/seasons/</string>
+    <string name="request_all_seasons">/seasons?</string>
+    <string name="request_all_teams">/teamSeasons?</string>
+    <string name="english_league_seasons">https://api.sportdeer.com/v1/leagues/8/seasons?</string>
+    <string name="country_england">46</string>
+    <string name="country_france">54</string>
+    <string name="country_germany">59</string>
+    <string name="country_italy">86</string>
+    <string name="country_spain">122</string>
+    <string name="league_england">8</string>
+    <string name="league_france">123</string>
+    <string name="league_germany">108</string>
+    <string name="league_italy">101</string>
+    <string name="league_spain">129</string>
+    <string name="is_last_season">is_last_season</string>
 </resources>
