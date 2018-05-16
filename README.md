@@ -1,14 +1,12 @@
 # CSE430-Android-Development
 # Screenshots
 <p align="middle">
-<img src="https://user-images.githubusercontent.com/22989662/40127591-01d752d4-5930-11e8-97a4-1cb96cdbec08.png" width="200" height="356" hspace="20">
-<img src="https://user-images.githubusercontent.com/22989662/40127606-0f13966a-5930-11e8-88a0-e3fbf91d58d0.png" width="200" height="356" hspace="20">
-<img src="https://user-images.githubusercontent.com/22989662/40127656-29626852-5930-11e8-852c-41939cd1bb6f.png" width="200" height="356" hspace="20">
-</p>
-<p align="middle">
-<img src="https://user-images.githubusercontent.com/22989662/40127665-2f702b4e-5930-11e8-9a92-0599ad00d985.png" width="200" height="356" hspace="20">
-<img src="https://user-images.githubusercontent.com/22989662/40127681-3929e72e-5930-11e8-99ea-ab556c691571.png" width="200" height="356" hspace="20">
-<img src="https://user-images.githubusercontent.com/22989662/40127689-3e3284ba-5930-11e8-9615-d183a759c592.png" width="200" height="356" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40127591-01d752d4-5930-11e8-97a4-1cb96cdbec08.png" width="167" height="297" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40127606-0f13966a-5930-11e8-88a0-e3fbf91d58d0.png" width="167" height="297" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40127656-29626852-5930-11e8-852c-41939cd1bb6f.png" width="167" height="297" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40127665-2f702b4e-5930-11e8-9a92-0599ad00d985.png" width="167" height="297" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40127681-3929e72e-5930-11e8-99ea-ab556c691571.png" width="167" height="297" hspace="20">
+<img src="https://user-images.githubusercontent.com/22989662/40127689-3e3284ba-5930-11e8-9615-d183a759c592.png" width="167" height="297" hspace="20">
 </p>
 
 # Description
