@@ -12,3 +12,5 @@ This is android Development course.
 4] Lab 4 "Voice Calendar" Added 13/3/2018 
 
 5] Lab 5 "Pedometer" Added 27/3/2018 
+
+6] Lab 6 "Money Collector Game" Added 03/4/2018 
