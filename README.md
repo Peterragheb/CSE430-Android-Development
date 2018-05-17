@@ -62,8 +62,7 @@ A simple matching game that allows the player to click on a card to see the pict
 </p>
 
 ## Lab 6: Money Collector Game App ## 
-  The Money collector game is a game based on Google-Map API and Geo-fencing. You are expected to create three geo-fences around the building where the lectures of this course is scheduled. Your course instructor will explain to you the method and suggested locations for these geo-fences.
-  The user will collect different coins when they walk through these geo-fences.
+  The Money collector game is a game based on Google-Map API and Geo-fencing. You are expected to create three geo-fences around the building where the lectures of this course is scheduled.The user will collect different coins when they walk through these geo-fences.
 <p align="middle">
 <img src="https://user-images.githubusercontent.com/22989662/40127681-3929e72e-5930-11e8-99ea-ab556c691571.png" width="200" height="356" hspace="20">
 </p>
